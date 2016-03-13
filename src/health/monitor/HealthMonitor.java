@@ -5,8 +5,6 @@
  */
 package health.monitor;
 
-import javax.swing.JFrame;
-import GUI.mainJframe;
 /**
  *
  * @author Ahmed
@@ -18,8 +16,6 @@ public class HealthMonitor {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        JFrame theFrame = new mainJframe();
-        theFrame.setVisible(true);
     }
     
 }
