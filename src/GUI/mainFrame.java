@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Ahmed
@@ -15,7 +18,14 @@ public class mainFrame extends javax.swing.JFrame {
      * Creates new form mainFrame
      */
     public mainFrame() {
-        initComponents();
+        // initializing the frame
+        this.init();
+
+        // Setting frame size
+        this.setSize(800, 800);
+
+        // Centring the frame
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -95,4 +105,17 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
+
+    private void init() {
+        // Setting the Program icon
+        ImageIcon theIcon = new ImageIcon("src//resources//images//heart-rate.png");
+        this.setIconImage(theIcon.getImage());
+
+        // Setting the program Title
+        this.setTitle("Health Monitor");
+
+        this.setVisible(true);
+        //this.setBounds(0, 0, 500, 500);
+        initComponents();
+    }
 }
