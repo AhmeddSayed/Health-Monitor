@@ -5,7 +5,9 @@
  */
 package health.monitor;
 
+import GUI.mainFrame;
 import data.control.dataSheet;
+import javax.swing.JFrame;
 
 /**
  *
@@ -17,6 +19,8 @@ public class HealthMonitor {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        JFrame theFrame = new mainFrame();
+        theFrame.setVisible(true);
         dataSheet a = new dataSheet();
     }
     
