@@ -7,6 +7,7 @@ package port.input;
 
 import com.fazecast.jSerialComm.SerialPort;
 import java.io.InputStream;
+import java.util.Scanner;
 
 /**
  *
@@ -16,46 +17,56 @@ import java.io.InputStream;
 public class DataInput {
 
     boolean shouldExit = false;
+    SerialPort comPort;
 
-    public void read() {
-        // Choosing the active port
-        SerialPort comPort = SerialPort.getCommPorts()[0];
+    public DataInput() {
 
-        // for testing
-        //System.out.println("P: "+comPort.getDescriptivePortName()+" rate "+comPort.getBaudRate());
-        // setting the default baud rate
-        comPort.setBaudRate(115200);
+        if (SerialPort.getCommPorts().length > 0) {
+            // Choosing the active port
+            comPort = SerialPort.getCommPorts()[0];
 
-        // openning the port
-        comPort.openPort();
+            // setting the default baud rate
+            comPort.setBaudRate(57600);
 
-        //setting the timeouts to conserve memory and proceccing power
-        comPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 100, 0);
+            // openning the port
+            comPort.openPort();
+
+            //setting the timeouts to conserve memory and proceccing power
+            comPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 100, 0);
+        }
+    }
+
+    public String read() {
 
         // reading data
         InputStream in = comPort.getInputStream();
         try {
-            while (true) {
-                // if the shouldExit flag is set, do not continue
-                if (!shouldExit) {
-                    System.out.print((char) in.read());
-                } else {
-                    break;
-                }
-            }
-            // close the input stream
-            in.close();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            // if the shouldExit flag is set, do not continue
+            if (!shouldExit) {
+                // need more work when I have the real data
+                // TODO: update dleimiter and string validation
+                Scanner theScanner = new Scanner(in, "UTF-8").useDelimiter("\n");
 
-        // done, closing port
-        comPort.closePort();
+                if (theScanner.hasNext()) {
+                    return theScanner.next();
+                } else {
+                    return "";
+                }
+            } else {
+                // close the input stream
+                in.close();
+                this.closeConnection();
+                return "";
+            }
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public void closeConnection() {
         // setting the should exit flag
         this.shouldExit = true;
+        // done, closing port
+        comPort.closePort();
     }
 }

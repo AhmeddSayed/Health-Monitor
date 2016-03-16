@@ -5,11 +5,8 @@
  */
 package health.monitor;
 
-import GUI.mainFrame;
-import data.control.dataSheet;
-import javax.swing.JFrame;
-import port.input.DataInput;
-
+import GUI.MainFrame;
+import data.control.DataController;
 
 /**
  *
@@ -21,15 +18,8 @@ public class HealthMonitor {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        JFrame theFrame = new mainFrame();
-        dataSheet a = new dataSheet();
-        a.connect();
-        //InputSignal theSignal = new InputSignal();
-        //dataPort p = new dataPort();
-        //SerialTest t = new SerialTest();
-        DataInput s = new DataInput();
-        s.read();
+        DataController dataController = new DataController();
+        MainFrame theFrame = new MainFrame();
+
     }
-        
 }
