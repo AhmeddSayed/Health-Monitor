@@ -8,6 +8,8 @@ package health.monitor;
 import GUI.mainFrame;
 import data.control.dataSheet;
 import javax.swing.JFrame;
+import port.input.DataInput;
+
 
 /**
  *
@@ -23,6 +25,11 @@ public class HealthMonitor {
         JFrame theFrame = new mainFrame();
         dataSheet a = new dataSheet();
         a.connect();
+        //InputSignal theSignal = new InputSignal();
+        //dataPort p = new dataPort();
+        //SerialTest t = new SerialTest();
+        DataInput s = new DataInput();
+        s.read();
     }
-    
+        
 }
