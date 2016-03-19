@@ -5,7 +5,7 @@
  */
 package health.monitor;
 
-import GUI.MainFrame;
+import GUI.mainFrame;
 import data.control.DataController;
 
 /**
@@ -19,7 +19,7 @@ public class HealthMonitor {
      */
     public static void main(String[] args) {
         DataController dataController = new DataController();
-        MainFrame theFrame = new MainFrame();
+        mainFrame theFrame = new mainFrame();
 
     }
 }

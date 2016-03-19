@@ -17,9 +17,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -86,7 +83,21 @@ public class dataSheet {
         }
     }
 
-    public boolean updateRow(int patientId) {
+    public boolean updateRow(Patient aPatient) {
+
+        // looping through the rows (each row = a patient)
+        Iterator<Row> iterator = firstSheet.iterator();
+
+        while (iterator.hasNext()) {
+            // reading the row
+            Row aRow = iterator.next();
+
+            // checking if it's the row we want to modify
+            if ((int) aRow.getCell(0).getNumericCellValue() == aPatient.id) {
+                // looping through the cells
+                break;
+            }
+        }
 
         /*
          workbook.write(outputStream);
