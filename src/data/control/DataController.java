@@ -16,17 +16,17 @@ import port.input.DataInput;
  * @author Ahmed
  */
 public class DataController {
-    
+
     ArrayList<Patient> patients = new ArrayList();
     dataSheet dataSheet = new dataSheet();
     DataInput input = new DataInput();
-    
+
     public DataController() {
         dataSheet.connect();
         loadPatients();
         updateFromInput();
     }
-    
+
     private void getInput() {
         // initialize database, load all data in memory as Patients
         // initialize datainput from serial port
@@ -49,13 +49,13 @@ public class DataController {
      */
     private void loadPatients() {
         ArrayList<Row> theRows;
-        
+
         if (dataSheet.isValid()) {
             theRows = dataSheet.fetchRows();
 
             // looping through the rows
             Iterator<Row> rowIterator = theRows.iterator();
-            
+
             while (rowIterator.hasNext()) {
                 // reading the row
                 Row aRow = rowIterator.next();
@@ -72,7 +72,7 @@ public class DataController {
                     // TODO: loop through cells by column index, and construct the patients
                     //then after each row, add patient to the patients array
                     switch (cell.getColumnIndex()) {
-                        
+
                         case 0:
                             // ID
                             aPatient.setID((int) cell.getNumericCellValue());
@@ -107,19 +107,31 @@ public class DataController {
                             // last_alarmed
                             aPatient.setLastAlarm(cell.getDateCellValue());
                             break;
+                        case 15:
+                            // sex
+                            aPatient.setSex(cell.getStringCellValue());
+                            break;
+                        case 16:
+                            // age
+                            aPatient.setAge((int) cell.getNumericCellValue());
+                            break;
                         default:
                             break;
                     }
                 }
-            this.patients.add(aPatient);
-            //aPatient.printAll();
+                this.patients.add(aPatient);
+                //aPatient.printAll();
             }
-            
+
         }
     }
-    
+
     private void updateFromInput() {
-        
+
     }
-    
+
+    public ArrayList<Patient> getPatients() {
+        return this.patients;
+    }
+
 }

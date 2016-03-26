@@ -5,14 +5,21 @@
  */
 package GUI;
 
-import java.awt.CardLayout;
-import javax.swing.JButton;
+import data.control.Patient;
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 /**
  *
  * @author Ahmed
  */
 public class HomePanel extends javax.swing.JPanel {
+
+    //ecgDrawPanel ecgPanel;
+    boolean isOnScreen = false;
+    SwingWorker worker1, worker2;
 
     /**
      * Creates new form HomeCard
@@ -32,61 +39,357 @@ public class HomePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
-        addPatient = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        monitor1 = new javax.swing.JPanel();
+        patient1 = new javax.swing.JLabel();
+        ecgDrawPanel1 = new ECG.ecgDrawPanel();
+        patient1Temp = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        editPatient1 = new javax.swing.JButton();
+        deletePatient1 = new javax.swing.JButton();
+        monitor2 = new javax.swing.JPanel();
+        patient2 = new javax.swing.JLabel();
+        ecgDrawPanel2 = new ECG.ecgDrawPanel();
+        patient2Temp = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        editPatient2 = new javax.swing.JButton();
+        deletePatient2 = new javax.swing.JButton();
+        monitor3 = new javax.swing.JPanel();
+        patient3 = new javax.swing.JLabel();
+        ecgDrawPanel3 = new ECG.ecgDrawPanel();
+        patient1Temp1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        editPatient3 = new javax.swing.JButton();
+        deletePatient3 = new javax.swing.JButton();
+        monitor4 = new javax.swing.JPanel();
+        patient4 = new javax.swing.JLabel();
+        ecgDrawPanel4 = new ECG.ecgDrawPanel();
+        patient2Temp1 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        editPatient4 = new javax.swing.JButton();
+        deletePatient4 = new javax.swing.JButton();
+        separator23 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        separator34 = new javax.swing.JSeparator();
 
         jLabel3.setText("Patient 1");
 
-        addPatient.setText("Add");
-        addPatient.addActionListener(new java.awt.event.ActionListener() {
+        patient1.setText("Patient 1");
+
+        ecgDrawPanel1.setAutoscrolls(true);
+        ecgDrawPanel1.setPreferredSize(new java.awt.Dimension(0, 150));
+
+        javax.swing.GroupLayout ecgDrawPanel1Layout = new javax.swing.GroupLayout(ecgDrawPanel1);
+        ecgDrawPanel1.setLayout(ecgDrawPanel1Layout);
+        ecgDrawPanel1Layout.setHorizontalGroup(
+            ecgDrawPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        ecgDrawPanel1Layout.setVerticalGroup(
+            ecgDrawPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 92, Short.MAX_VALUE)
+        );
+
+        patient1Temp.setText("jTextField1");
+
+        jLabel1.setText("Tempreature:");
+
+        editPatient1.setText("Edit");
+        editPatient1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addPatientActionPerformed(evt);
+                editPatient1ActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Patient 1");
+        deletePatient1.setText("Delete");
+        deletePatient1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletePatient1ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(51, 51, 51))
+        javax.swing.GroupLayout monitor1Layout = new javax.swing.GroupLayout(monitor1);
+        monitor1.setLayout(monitor1Layout);
+        monitor1Layout.setHorizontalGroup(
+            monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(monitor1Layout.createSequentialGroup()
+                .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(monitor1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ecgDrawPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
+                    .addGroup(monitor1Layout.createSequentialGroup()
+                        .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(monitor1Layout.createSequentialGroup()
+                                .addComponent(editPatient1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deletePatient1))
+                            .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(monitor1Layout.createSequentialGroup()
+                                    .addGap(99, 99, 99)
+                                    .addComponent(patient1))
+                                .addGroup(monitor1Layout.createSequentialGroup()
+                                    .addGap(33, 33, 33)
+                                    .addComponent(jLabel1)
+                                    .addGap(39, 39, 39)
+                                    .addComponent(patient1Temp, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 79, Short.MAX_VALUE)))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        monitor1Layout.setVerticalGroup(
+            monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(monitor1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addComponent(patient1)
+                .addGap(28, 28, 28)
+                .addComponent(ecgDrawPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(patient1Temp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(36, 36, 36)
+                .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editPatient1)
+                    .addComponent(deletePatient1))
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        patient2.setText("Patient 2");
+
+        ecgDrawPanel2.setAutoscrolls(true);
+        ecgDrawPanel2.setPreferredSize(new java.awt.Dimension(0, 150));
+
+        javax.swing.GroupLayout ecgDrawPanel2Layout = new javax.swing.GroupLayout(ecgDrawPanel2);
+        ecgDrawPanel2.setLayout(ecgDrawPanel2Layout);
+        ecgDrawPanel2Layout.setHorizontalGroup(
+            ecgDrawPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        ecgDrawPanel2Layout.setVerticalGroup(
+            ecgDrawPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 92, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        patient2Temp.setText("jTextField1");
+
+        jLabel2.setText("Tempreature:");
+
+        editPatient2.setText("Edit");
+        editPatient2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editPatient2ActionPerformed(evt);
+            }
+        });
+
+        deletePatient2.setText("Delete");
+        deletePatient2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletePatient2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout monitor2Layout = new javax.swing.GroupLayout(monitor2);
+        monitor2.setLayout(monitor2Layout);
+        monitor2Layout.setHorizontalGroup(
+            monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(monitor2Layout.createSequentialGroup()
+                .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(monitor2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ecgDrawPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
+                    .addGroup(monitor2Layout.createSequentialGroup()
+                        .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(monitor2Layout.createSequentialGroup()
+                                .addComponent(editPatient2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deletePatient2))
+                            .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(monitor2Layout.createSequentialGroup()
+                                    .addGap(99, 99, 99)
+                                    .addComponent(patient2))
+                                .addGroup(monitor2Layout.createSequentialGroup()
+                                    .addGap(33, 33, 33)
+                                    .addComponent(jLabel2)
+                                    .addGap(39, 39, 39)
+                                    .addComponent(patient2Temp, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 55, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        monitor2Layout.setVerticalGroup(
+            monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(monitor2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(patient2)
+                .addGap(28, 28, 28)
+                .addComponent(ecgDrawPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(patient2Temp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(36, 36, 36)
+                .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editPatient2)
+                    .addComponent(deletePatient2))
+                .addContainerGap())
+        );
+
+        patient3.setText("Patient 1");
+
+        ecgDrawPanel3.setAutoscrolls(true);
+        ecgDrawPanel3.setPreferredSize(new java.awt.Dimension(0, 150));
+
+        javax.swing.GroupLayout ecgDrawPanel3Layout = new javax.swing.GroupLayout(ecgDrawPanel3);
+        ecgDrawPanel3.setLayout(ecgDrawPanel3Layout);
+        ecgDrawPanel3Layout.setHorizontalGroup(
+            ecgDrawPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        ecgDrawPanel3Layout.setVerticalGroup(
+            ecgDrawPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 92, Short.MAX_VALUE)
+        );
+
+        patient1Temp1.setText("jTextField1");
+
+        jLabel4.setText("Tempreature:");
+
+        editPatient3.setText("Edit");
+        editPatient3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editPatient3ActionPerformed(evt);
+            }
+        });
+
+        deletePatient3.setText("Delete");
+        deletePatient3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletePatient3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout monitor3Layout = new javax.swing.GroupLayout(monitor3);
+        monitor3.setLayout(monitor3Layout);
+        monitor3Layout.setHorizontalGroup(
+            monitor3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(monitor3Layout.createSequentialGroup()
+                .addGroup(monitor3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(monitor3Layout.createSequentialGroup()
+                        .addComponent(editPatient3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deletePatient3))
+                    .addGroup(monitor3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(monitor3Layout.createSequentialGroup()
+                            .addGap(99, 99, 99)
+                            .addComponent(patient3))
+                        .addGroup(monitor3Layout.createSequentialGroup()
+                            .addGap(33, 33, 33)
+                            .addComponent(jLabel4)
+                            .addGap(39, 39, 39)
+                            .addComponent(patient1Temp1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(monitor3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ecgDrawPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        monitor3Layout.setVerticalGroup(
+            monitor3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(monitor3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(patient3)
+                .addGap(28, 28, 28)
+                .addComponent(ecgDrawPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(monitor3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(patient1Temp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(36, 36, 36)
+                .addGroup(monitor3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editPatient3)
+                    .addComponent(deletePatient3))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        patient4.setText("Patient 2");
+
+        ecgDrawPanel4.setAutoscrolls(true);
+        ecgDrawPanel4.setPreferredSize(new java.awt.Dimension(0, 150));
+
+        javax.swing.GroupLayout ecgDrawPanel4Layout = new javax.swing.GroupLayout(ecgDrawPanel4);
+        ecgDrawPanel4.setLayout(ecgDrawPanel4Layout);
+        ecgDrawPanel4Layout.setHorizontalGroup(
+            ecgDrawPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
+        ecgDrawPanel4Layout.setVerticalGroup(
+            ecgDrawPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 92, Short.MAX_VALUE)
+        );
+
+        patient2Temp1.setText("jTextField1");
+
+        jLabel5.setText("Tempreature:");
+
+        editPatient4.setText("Edit");
+        editPatient4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editPatient4ActionPerformed(evt);
+            }
+        });
+
+        deletePatient4.setText("Delete");
+        deletePatient4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletePatient4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout monitor4Layout = new javax.swing.GroupLayout(monitor4);
+        monitor4.setLayout(monitor4Layout);
+        monitor4Layout.setHorizontalGroup(
+            monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(monitor4Layout.createSequentialGroup()
+                .addGroup(monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(monitor4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ecgDrawPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
+                    .addGroup(monitor4Layout.createSequentialGroup()
+                        .addGroup(monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(monitor4Layout.createSequentialGroup()
+                                .addComponent(editPatient4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deletePatient4))
+                            .addGroup(monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(monitor4Layout.createSequentialGroup()
+                                    .addGap(99, 99, 99)
+                                    .addComponent(patient4))
+                                .addGroup(monitor4Layout.createSequentialGroup()
+                                    .addGap(33, 33, 33)
+                                    .addComponent(jLabel5)
+                                    .addGap(39, 39, 39)
+                                    .addComponent(patient2Temp1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 55, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        monitor4Layout.setVerticalGroup(
+            monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(monitor4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(patient4)
+                .addGap(28, 28, 28)
+                .addComponent(ecgDrawPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(patient2Temp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(36, 36, 36)
+                .addGroup(monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editPatient4)
+                    .addComponent(deletePatient4))
+                .addContainerGap())
+        );
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        separator34.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -94,46 +397,203 @@ public class HomePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addPatient, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(monitor3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addComponent(separator34, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addComponent(monitor4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(separator23, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(monitor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(monitor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addPatient, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-                .addGap(15, 15, 15))
+                    .addComponent(monitor1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(monitor2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator2))
+                .addGap(18, 18, 18)
+                .addComponent(separator23, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(monitor3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(monitor4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(separator34))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientActionPerformed
+    private void deletePatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatient1ActionPerformed
+        mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
+        topFrame.deletePatient(this.patient1.getText());
+    }//GEN-LAST:event_deletePatient1ActionPerformed
+
+    private void editPatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatient1ActionPerformed
         // TODO add your handling code here:
-        CardLayout cardLayout = (CardLayout) this.getParent().getLayout();
-        cardLayout.show(this.getParent(), "add");
-    }//GEN-LAST:event_addPatientActionPerformed
+        mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
+        topFrame.editPatient(this.patient1.getText());
+    }//GEN-LAST:event_editPatient1ActionPerformed
+
+    private void editPatient2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatient2ActionPerformed
+        // TODO add your handling code here:
+        mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
+        topFrame.editPatient(this.patient2.getText());
+    }//GEN-LAST:event_editPatient2ActionPerformed
+
+    private void deletePatient2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatient2ActionPerformed
+        // TODO add your handling code here:
+        mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
+        topFrame.deletePatient(this.patient1.getText());
+    }//GEN-LAST:event_deletePatient2ActionPerformed
+
+    private void editPatient3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatient3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editPatient3ActionPerformed
+
+    private void deletePatient3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatient3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deletePatient3ActionPerformed
+
+    private void editPatient4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatient4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editPatient4ActionPerformed
+
+    private void deletePatient4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatient4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deletePatient4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addPatient;
+    private javax.swing.JButton deletePatient1;
+    private javax.swing.JButton deletePatient2;
+    private javax.swing.JButton deletePatient3;
+    private javax.swing.JButton deletePatient4;
+    private ECG.ecgDrawPanel ecgDrawPanel1;
+    private ECG.ecgDrawPanel ecgDrawPanel2;
+    private ECG.ecgDrawPanel ecgDrawPanel3;
+    private ECG.ecgDrawPanel ecgDrawPanel4;
+    private javax.swing.JButton editPatient1;
+    private javax.swing.JButton editPatient2;
+    private javax.swing.JButton editPatient3;
+    private javax.swing.JButton editPatient4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPanel monitor1;
+    private javax.swing.JPanel monitor2;
+    private javax.swing.JPanel monitor3;
+    private javax.swing.JPanel monitor4;
+    private javax.swing.JLabel patient1;
+    private javax.swing.JTextField patient1Temp;
+    private javax.swing.JTextField patient1Temp1;
+    private javax.swing.JLabel patient2;
+    private javax.swing.JTextField patient2Temp;
+    private javax.swing.JTextField patient2Temp1;
+    private javax.swing.JLabel patient3;
+    private javax.swing.JLabel patient4;
+    private javax.swing.JSeparator separator23;
+    private javax.swing.JSeparator separator34;
     // End of variables declaration//GEN-END:variables
-    private void init() {   
+    private void init() {
         this.initComponents();
+        this.patient1Temp.setEditable(false);
+        this.patient2Temp.setEditable(false);
+    }
+
+    public void displayChart() {
+        worker1 = new SwingWorker() {
+
+            @Override
+            protected Object doInBackground() throws Exception {
+                if (!isCancelled()) {
+                    while (true && !isCancelled()) {
+                        int rand = (int) (Math.random() * 100);
+                        patient1Temp.setText(String.valueOf(rand));
+                        ecgDrawPanel1.move_1(rand);
+                    }
+                }
+                return null;
+            }
+        };
+
+        worker2 = new SwingWorker() {
+
+            @Override
+            protected Object doInBackground() throws Exception {
+                if (!isCancelled()) {
+                    while (true && !isCancelled()) {
+                        int rand = (int) (Math.random() * 100);
+                        patient2Temp.setText(String.valueOf(rand));
+                        ecgDrawPanel2.move_1(rand);
+                    }
+                }
+                return null;
+            }
+        };
+
+        if (this.isOnScreen) {
+            worker1.execute();
+            worker2.execute();
+        } else {
+            worker1.cancel(true);
+            worker2.cancel(true);
+        }
+
+    }
+
+    public void setOnScreenFlag() {
+        this.isOnScreen = true;
+        this.displayChart();
+    }
+
+    public void setNotOnScreenFlag() {
+        this.isOnScreen = false;
+        if (worker1 != null && worker2 != null) {
+            worker1.cancel(true);
+            worker2.cancel(true);
+        }
+    }
+
+    public void readPatients(ArrayList<Patient> thePatients) {
+        // reading the patients, and updating the monitor with patient data
+
+        for (Patient aPatient : thePatients) {
+            aPatient.printAll();
+            switch (aPatient.getId()) {
+                case 1:
+                    this.patient1.setText(aPatient.getName());
+                    break;
+                case 2:
+                    this.patient2.setText(aPatient.getName());
+                    break;
+                case 3:
+                    this.patient3.setText(aPatient.getName());
+                    break;
+                case 4:
+                    this.patient4.setText(aPatient.getName());
+                    break;
+            }
+        }
+
+        if (thePatients.size() < 3) {
+            this.separator23.setVisible(false);
+            this.monitor3.setVisible(false);
+            this.monitor4.setVisible(false);
+            this.separator34.setVisible(false);
+            this.revalidate();
+        }
     }
 }

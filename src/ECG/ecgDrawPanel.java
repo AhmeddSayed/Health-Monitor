@@ -11,7 +11,6 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,19 +24,18 @@ public class ecgDrawPanel extends javax.swing.JPanel {
     BufferedImage I;
     Graphics2D G;
     int point_s = 4;
+    boolean isCancelled = false;
 
     /**
      * Creates new form ecgDrawPanel
      */
     public ecgDrawPanel() {
-        setBounds(10, 10, 600, 300);
+        setBounds(0, 0, 300, 150);
         I = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
         G = I.createGraphics();
         G.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         G.setColor(Color.white);
-        G.fillRect(0, 0, 600, 300);
-        G.drawLine(0, 0, 600, 600);
-        repaint();
+        G.fillRect(0, 0, 300, 150);
     }
 
     public void clear(int x, int w) {
@@ -45,30 +43,33 @@ public class ecgDrawPanel extends javax.swing.JPanel {
         G.fillRect(x, 0, w, getHeight()); //fill the rectangle with the specified int x, int y, int width, int height
     }
 
-    public void move_1() {
+    public void move_1(int reading) {
+        Point p1, p2;
 
-        while (true) {
-            try {
-                Point p1, p2;
-                int p = (int) (Math.random() * 100);
-                if (previousPoint == null) {
-                    p1 = new Point(0, p - 50);
-                } else {
-                    p1 = previousPoint;
-                }   p2 = new Point(0, p - 50);
-                G.drawImage(I, 0, 0, getWidth() - point_s, getHeight(), point_s, 0, getWidth(), getHeight(), null);
-                clear(getWidth() - point_s, point_s);
-                G.setColor(Color.gray);
-                G.drawLine(getWidth() - point_s - 1, p1.y + getHeight() / 2, getWidth() - 1, p2.y + getHeight() / 2);
-                previousPoint = p2;
-                repaint();
-                // allPoints.remove(0);
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(ecgDrawPanel.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            if (previousPoint == null) {
+                p1 = new Point(0, reading - 50);
+            } else {
+                p1 = previousPoint;
             }
+            p2 = new Point(0, reading - 50);
 
+            //p2 = new Point(0, reading);
+            G.setColor(Color.black);
+            G.drawLine(5, getHeight() / 2, getWidth(), getHeight() / 2);
+            G.drawImage(I, 0, 0, getWidth() - point_s, getHeight(), point_s, 0, getWidth(), getHeight(), null);
+            clear(getWidth() - point_s, point_s);
+            G.setColor(Color.red);
+            G.drawLine(getWidth() - point_s - 1, p1.y + getHeight() / 2, getWidth() - 1, p2.y + getHeight() / 2);
+            previousPoint = p2;
+            repaint();
+            // allPoints.remove(0);
+            if (!Thread.interrupted()) {
+                Thread.sleep(100);
+            }
+        } catch (InterruptedException ex) {
         }
+
     }
 
     public void paint(Graphics g) {

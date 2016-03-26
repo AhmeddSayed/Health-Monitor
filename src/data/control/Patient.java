@@ -5,7 +5,6 @@
  */
 package data.control;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +22,8 @@ public class Patient {
     String dateAdded;
     String lastUpdated;
     String lastAlarm;
+    String sex;
+    int age;
 
     public void setID(int id) {
         this.id = id;
@@ -31,6 +32,14 @@ public class Patient {
     public void setName(String name) {
 
         this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public void addHeartRate(double heartRate) {
@@ -77,6 +86,24 @@ public class Patient {
         System.out.println("dateAdded: " + this.dateAdded);
         System.out.println("last: " + this.lastUpdated);
         System.out.println("Alarm: " + this.lastAlarm);
+        System.out.println("Sex: " + this.sex);
+        System.out.println("age: " + this.age);
         System.out.println("----------------------------");
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+
+    public String getSex() {
+        return this.sex;
     }
 }

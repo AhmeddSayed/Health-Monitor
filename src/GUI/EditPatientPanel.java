@@ -48,33 +48,11 @@ public class EditPatientPanel extends JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setOnScreenFlag() {
-        this.isOnScreen = true;
-        this.displayChart();
-    }
-
-    public void setNotOnScreenFlag() {
-        this.isOnScreen = false;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-    private void displayChart() {
-        SwingWorker theWorker = new SwingWorker() {
 
-            @Override
-            protected Object doInBackground() throws Exception {
-                ecgPanel.move_1();
-                return null;
-            }
-        };
-
-        if (!this.isOnScreen) {
-            //ecgPanel.move_1();
-            theWorker.cancel(true);
-        }else{
-            theWorker.execute();
-        }
-
+    void edit(String name) {
+        
     }
 }
