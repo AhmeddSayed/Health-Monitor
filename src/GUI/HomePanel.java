@@ -6,8 +6,12 @@
 package GUI;
 
 import data.control.Patient;
+import java.awt.Button;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
@@ -68,7 +72,7 @@ public class HomePanel extends javax.swing.JPanel {
         editPatient4 = new javax.swing.JButton();
         deletePatient4 = new javax.swing.JButton();
         separator23 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
+        separator12 = new javax.swing.JSeparator();
         separator34 = new javax.swing.JSeparator();
 
         jLabel3.setText("Patient 1");
@@ -387,7 +391,7 @@ public class HomePanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        separator12.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         separator34.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -400,15 +404,15 @@ public class HomePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(monitor3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(separator34, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(monitor4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(separator23, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(monitor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(separator12, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(monitor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -420,7 +424,7 @@ public class HomePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(monitor1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(monitor2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator2))
+                    .addComponent(separator12))
                 .addGap(18, 18, 18)
                 .addComponent(separator23, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -434,42 +438,44 @@ public class HomePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deletePatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatient1ActionPerformed
-        mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
-        topFrame.deletePatient(this.patient1.getText());
+        confirmDelete(1);
+
     }//GEN-LAST:event_deletePatient1ActionPerformed
 
     private void editPatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatient1ActionPerformed
         // TODO add your handling code here:
         mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
-        topFrame.editPatient(this.patient1.getText());
+        topFrame.editPatient(1);
     }//GEN-LAST:event_editPatient1ActionPerformed
 
     private void editPatient2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatient2ActionPerformed
         // TODO add your handling code here:
         mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
-        topFrame.editPatient(this.patient2.getText());
+        topFrame.editPatient(2);
     }//GEN-LAST:event_editPatient2ActionPerformed
 
     private void deletePatient2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatient2ActionPerformed
-        // TODO add your handling code here:
-        mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
-        topFrame.deletePatient(this.patient1.getText());
+        confirmDelete(2);
+
     }//GEN-LAST:event_deletePatient2ActionPerformed
 
     private void editPatient3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatient3ActionPerformed
-        // TODO add your handling code here:
+        mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
+        topFrame.editPatient(3);
     }//GEN-LAST:event_editPatient3ActionPerformed
 
     private void deletePatient3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatient3ActionPerformed
-        // TODO add your handling code here:
+        confirmDelete(3);
     }//GEN-LAST:event_deletePatient3ActionPerformed
 
     private void editPatient4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatient4ActionPerformed
-        // TODO add your handling code here:
+        mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
+        topFrame.editPatient(4);
     }//GEN-LAST:event_editPatient4ActionPerformed
 
     private void deletePatient4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatient4ActionPerformed
-        // TODO add your handling code here:
+        confirmDelete(4);
+
     }//GEN-LAST:event_deletePatient4ActionPerformed
 
 
@@ -491,7 +497,6 @@ public class HomePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel monitor1;
     private javax.swing.JPanel monitor2;
     private javax.swing.JPanel monitor3;
@@ -504,6 +509,7 @@ public class HomePanel extends javax.swing.JPanel {
     private javax.swing.JTextField patient2Temp1;
     private javax.swing.JLabel patient3;
     private javax.swing.JLabel patient4;
+    private javax.swing.JSeparator separator12;
     private javax.swing.JSeparator separator23;
     private javax.swing.JSeparator separator34;
     // End of variables declaration//GEN-END:variables
@@ -588,12 +594,97 @@ public class HomePanel extends javax.swing.JPanel {
             }
         }
 
-        if (thePatients.size() < 3) {
-            this.separator23.setVisible(false);
-            this.monitor3.setVisible(false);
-            this.monitor4.setVisible(false);
-            this.separator34.setVisible(false);
-            this.revalidate();
+        switch (thePatients.size()) {
+            case 0:
+                // hide everything
+                this.monitor1.setVisible(false);
+                this.monitor2.setVisible(false);
+                this.monitor3.setVisible(false);
+                this.monitor4.setVisible(false);
+                this.separator12.setVisible(false);
+                this.separator23.setVisible(false);
+                this.separator34.setVisible(false);
+                break;
+            case 1:
+                this.monitor1.setVisible(true);
+                this.monitor2.setVisible(false);
+                this.monitor3.setVisible(false);
+                this.monitor4.setVisible(false);
+                this.separator12.setVisible(false);
+                this.separator23.setVisible(false);
+                this.separator34.setVisible(false);
+                break;
+            case 2:
+                this.monitor1.setVisible(true);
+                this.monitor2.setVisible(true);
+                this.separator12.setVisible(true);
+                this.separator23.setVisible(false);
+                this.monitor3.setVisible(false);
+                this.monitor4.setVisible(false);
+                this.separator34.setVisible(false);
+                break;
+            case 3:
+                this.monitor1.setVisible(true);
+                this.monitor2.setVisible(true);
+                this.separator12.setVisible(true);
+                this.separator23.setVisible(true);
+                this.separator34.setVisible(false);
+                this.monitor3.setVisible(true);
+                this.monitor4.setVisible(false);
+                break;
+            case 4:
+                this.monitor1.setVisible(true);
+                this.monitor2.setVisible(true);
+                this.monitor3.setVisible(true);
+                this.monitor4.setVisible(true);
+                this.separator12.setVisible(true);
+                this.separator23.setVisible(true);
+                this.separator34.setVisible(true);
+                break;
+            default:
+                break;
         }
+
+        this.revalidate();
+
+    }
+
+    private void confirmDelete(int id) {
+        // setting up the buttons to use with the popup
+        JButton[] theButtons = new JButton[2];
+        theButtons[0] = new JButton();
+        theButtons[1] = new JButton();
+
+        theButtons[0].setName("Yes");
+        theButtons[0].setText("Yes");
+        theButtons[1].setName("No");
+        theButtons[1].setText("No");
+
+        // setting up the action listeners for the new buttons
+        theButtons[0].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SwingUtilities.getWindowAncestor(theButtons[1]).dispose();
+                delete(id);
+            }
+
+        });
+        // setting up the action listeners for the new buttons
+        theButtons[1].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SwingUtilities.getWindowAncestor(theButtons[1]).dispose();
+            }
+
+        });
+
+        // displaying the dialog
+        JOptionPane.showOptionDialog(this, "Are you sure you want to delete this patient?", " Delete Patient", 0, 0, null, theButtons, theButtons[0]);
+
+    }
+
+    private void delete(int id) {
+        mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
+        topFrame.deletePatient(id);
     }
 }

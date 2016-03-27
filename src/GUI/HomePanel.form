@@ -28,16 +28,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="monitor3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="25" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="separator34" min="-2" pref="2" max="-2" attributes="0"/>
-                      <EmptySpace pref="25" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="monitor4" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="separator23" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="monitor1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jSeparator2" min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="separator12" min="-2" pref="2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="monitor2" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -53,7 +53,7 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="monitor1" max="32767" attributes="0"/>
                   <Component id="monitor2" max="32767" attributes="0"/>
-                  <Component id="jSeparator2" max="32767" attributes="0"/>
+                  <Component id="separator12" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="separator23" min="-2" pref="10" max="-2" attributes="0"/>
@@ -529,7 +529,7 @@
     </Container>
     <Component class="javax.swing.JSeparator" name="separator23">
     </Component>
-    <Component class="javax.swing.JSeparator" name="jSeparator2">
+    <Component class="javax.swing.JSeparator" name="separator12">
       <Properties>
         <Property name="orientation" type="int" value="1"/>
       </Properties>

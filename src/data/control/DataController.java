@@ -6,9 +6,6 @@
 package data.control;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
 import port.input.DataInput;
 
 /**
@@ -22,9 +19,7 @@ public class DataController {
     DataInput input = new DataInput();
 
     public DataController() {
-        dataSheet.connect();
         loadPatients();
-        updateFromInput();
     }
 
     private void getInput() {
@@ -48,82 +43,7 @@ public class DataController {
      *  last_updated, last_alarmed
      */
     private void loadPatients() {
-        ArrayList<Row> theRows;
-
-        if (dataSheet.isValid()) {
-            theRows = dataSheet.fetchRows();
-
-            // looping through the rows
-            Iterator<Row> rowIterator = theRows.iterator();
-
-            while (rowIterator.hasNext()) {
-                // reading the row
-                Row aRow = rowIterator.next();
-                Patient aPatient = new Patient();
-
-                // loading the cells
-                Iterator<Cell> cellIterator = aRow.cellIterator();
-
-                // looping through the cells
-                while (cellIterator.hasNext()) {
-                    // reading the cell
-                    Cell cell = cellIterator.next();
-
-                    // TODO: loop through cells by column index, and construct the patients
-                    //then after each row, add patient to the patients array
-                    switch (cell.getColumnIndex()) {
-
-                        case 0:
-                            // ID
-                            aPatient.setID((int) cell.getNumericCellValue());
-                            break;
-                        case 1:
-                            // Name
-                            aPatient.setName(cell.getStringCellValue());
-                            break;
-                        case 2: // heart rate
-                        case 3: // heart rate
-                        case 4: // heart rate
-                        case 5: // heart rate
-                        case 6: // heart rate
-                            aPatient.addHeartRate(cell.getNumericCellValue());
-                            break;
-                        case 7: // tempreature
-                        case 8: // tempreature
-                        case 9: // tempreature
-                        case 10:// tempreature
-                        case 11:// tempreature
-                            aPatient.addTempreature(cell.getNumericCellValue());
-                            break;
-                        case 12:
-                            // date_added
-                            aPatient.setDateAdded(cell.getDateCellValue());
-                            break;
-                        case 13:
-                            // last_updated
-                            aPatient.setLastUpdated(cell.getDateCellValue());
-                            break;
-                        case 14:
-                            // last_alarmed
-                            aPatient.setLastAlarm(cell.getDateCellValue());
-                            break;
-                        case 15:
-                            // sex
-                            aPatient.setSex(cell.getStringCellValue());
-                            break;
-                        case 16:
-                            // age
-                            aPatient.setAge((int) cell.getNumericCellValue());
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                this.patients.add(aPatient);
-                //aPatient.printAll();
-            }
-
-        }
+        this.patients = dataSheet.getPatients();
     }
 
     private void updateFromInput() {
@@ -132,6 +52,15 @@ public class DataController {
 
     public ArrayList<Patient> getPatients() {
         return this.patients;
+    }
+
+    public void addPatient(Patient newPatient) {
+        dataSheet.addPatient(newPatient);
+    }
+
+    public void update(ArrayList<Patient> allPatients) {
+        this.patients = allPatients;
+        dataSheet.update(patients);
     }
 
 }

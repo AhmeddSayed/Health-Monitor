@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import data.control.Patient;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -90,8 +93,8 @@ public class AddPatientPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         ageTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        maleRadioButton = new javax.swing.JRadioButton();
+        femaleRadioButton = new javax.swing.JRadioButton();
         cancelButton = new javax.swing.JButton();
         savePatientButton = new javax.swing.JButton();
 
@@ -128,18 +131,23 @@ public class AddPatientPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Sex:");
 
-        sexButtonGroup.add(jRadioButton3);
-        jRadioButton3.setText("Male");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        sexButtonGroup.add(maleRadioButton);
+        maleRadioButton.setText("Male");
+        maleRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                maleRadioButtonActionPerformed(evt);
             }
         });
 
-        sexButtonGroup.add(jRadioButton4);
-        jRadioButton4.setText("Female");
+        sexButtonGroup.add(femaleRadioButton);
+        femaleRadioButton.setText("Female");
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         savePatientButton.setText("Save");
         savePatientButton.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +174,7 @@ public class AddPatientPanel extends javax.swing.JPanel {
                     .addComponent(nameTextField)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(maleRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(savePatientButton)
                                 .addGap(0, 0, Short.MAX_VALUE)))
@@ -176,7 +184,7 @@ public class AddPatientPanel extends javax.swing.JPanel {
                                 .addComponent(cancelButton)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(femaleRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(30, 30, 30)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -184,21 +192,21 @@ public class AddPatientPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4)
+                    .addComponent(maleRadioButton)
+                    .addComponent(femaleRadioButton)
                     .addComponent(jLabel3))
                 .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -212,22 +220,25 @@ public class AddPatientPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ageTextFieldActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void maleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    }//GEN-LAST:event_maleRadioButtonActionPerformed
 
     private void savePatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePatientButtonActionPerformed
         // TODO add your handling code here:
 
         if (nameEmpty) {
-            System.out.println("name empty");
-        }
-        if (ageEmpty) {
-            System.out.println("age empty");
-        }
-        if (this.sexButtonGroup.getSelection() == null) {
-            System.out.println("sex empty");
+            // error, input name
+            JOptionPane.showMessageDialog(this, "Please enter a valid name.", " Error!", 0);
+        } else if (ageEmpty) {
+            // error, enter age
+            JOptionPane.showMessageDialog(this, "Please enter a valid age.", " Error!", 0);
 
+        } else if (this.sexButtonGroup.getSelection() == null) {
+            // error please choose a sex type
+            JOptionPane.showMessageDialog(this, "Please choose a sex type.", " Error!", 0);
+        } else {
+            createPatient();
         }
     }//GEN-LAST:event_savePatientButtonActionPerformed
 
@@ -235,20 +246,51 @@ public class AddPatientPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_nameTextFieldActionPerformed
 
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        mainFrame theFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
+        theFrame.showHome();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ageTextField;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JRadioButton femaleRadioButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JRadioButton maleRadioButton;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JButton savePatientButton;
     private javax.swing.ButtonGroup sexButtonGroup;
     // End of variables declaration//GEN-END:variables
+
+    private void createPatient() {
+        Patient newPatient = new Patient();
+        newPatient.setName(nameTextField.getText());
+        newPatient.setAge(Integer.valueOf(ageTextField.getText()));
+
+        if (maleRadioButton.isSelected()) {
+            newPatient.setSex("male");
+        } else {
+            newPatient.setSex("female");
+        }
+        this.clearAll();
+
+        mainFrame theFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
+        theFrame.addPatient(newPatient);
+    }
+
+    private void clearAll() {
+        // clearing all the entered data
+        this.nameTextField.setText("");
+        this.ageTextField.setText("");
+        this.maleRadioButton.setSelected(false);
+        this.femaleRadioButton.setSelected(false);
+        this.sexButtonGroup.clearSelection();
+    }
 }
