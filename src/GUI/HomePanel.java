@@ -577,7 +577,8 @@ public class HomePanel extends javax.swing.JPanel {
         // reading the patients, and updating the monitor with patient data
 
         for (Patient aPatient : thePatients) {
-            aPatient.printAll();
+           // aPatient.printAll();
+            
             switch (aPatient.getId()) {
                 case 1:
                     this.patient1.setText(aPatient.getName());

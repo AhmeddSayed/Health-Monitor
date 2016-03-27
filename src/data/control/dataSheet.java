@@ -211,10 +211,19 @@ public class dataSheet {
     }
 
     void update(ArrayList<Patient> patients) {
+        System.out.println("Rows: " + fetchRows().size());
+        System.out.println("patients: " + patients.size());
+
         // deleting the old rows
-        for (Row aRow : fetchRows()) {
-            firstSheet.removeRow(aRow);
+        ArrayList<Row> theRows = fetchRows();
+        // looping through the rows
+        Iterator<Row> rowIterator = theRows.iterator();
+
+        while (rowIterator.hasNext()) {
+            firstSheet.removeRow(rowIterator.next());
         }
+        saveToDisk();
+        
         // adding patients again
         for (Patient patientX : patients) {
             addPatient(patientX);
