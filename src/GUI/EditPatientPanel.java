@@ -22,7 +22,8 @@ public class EditPatientPanel extends JPanel {
 
     boolean isOnScreen = false;
     boolean nameEmpty = true, ageEmpty = true;
-    
+    Patient thisPatient;
+
     /**
      * Creates new form EditPatient
      */
@@ -130,6 +131,7 @@ public class EditPatientPanel extends JPanel {
 
         jLabel3.setText("Sex:");
 
+        sexButtonGroup.add(maleRadioButton);
         maleRadioButton.setText("Male");
         maleRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +139,7 @@ public class EditPatientPanel extends JPanel {
             }
         });
 
+        sexButtonGroup.add(femaleRadioButton);
         femaleRadioButton.setText("Female");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -146,13 +149,13 @@ public class EditPatientPanel extends JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                        .addComponent(ageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
                         .addGap(193, 193, 193))
                     .addComponent(nameTextField)
                     .addGroup(layout.createSequentialGroup()
@@ -250,10 +253,28 @@ public class EditPatientPanel extends JPanel {
     // End of variables declaration//GEN-END:variables
 
     void edit(Patient thePatient) {
+        // updating the fields according to the patient info
+        thisPatient = thePatient;
 
+        this.nameTextField.setText(thePatient.getName());
+        this.ageTextField.setText(String.valueOf(thePatient.getAge()));
+        if (thePatient.getSex().equals("male")) {
+            this.maleRadioButton.setSelected(true);
+        } else {
+            this.femaleRadioButton.setSelected(true);
+        }
     }
 
     private void updatePatient() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        thisPatient.setName(this.nameTextField.getText());
+        thisPatient.setAge(Integer.valueOf(this.ageTextField.getText()));
+
+        if (this.maleRadioButton.isSelected()) {
+            thisPatient.setSex("male");
+        } else {
+            thisPatient.setSex("female");
+        }
+        mainFrame theFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
+        theFrame.updatePatients(thisPatient);
     }
 }
