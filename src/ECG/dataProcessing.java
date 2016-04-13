@@ -18,6 +18,7 @@ public class dataProcessing extends Thread {
 
     ArrayList al = new ArrayList();
     ArrayList d_al;
+    
 
     public dataProcessing(ArrayList a_l) {
         d_al = a_l;
@@ -33,6 +34,7 @@ public class dataProcessing extends Thread {
                 try {
                     int p = (int) (Math.random() * 100);
                     d_al.add(new Point(0, p - 50));
+                    
                     Thread.sleep(2000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(dataProcessing.class.getName()).log(Level.SEVERE, null, ex);

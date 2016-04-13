@@ -48,11 +48,11 @@ public class ecgDrawPanel extends javax.swing.JPanel {
 
         try {
             if (previousPoint == null) {
-                p1 = new Point(0, reading - 50);
+                p1 = new Point(0, reading - 75);
             } else {
                 p1 = previousPoint;
             }
-            p2 = new Point(0, reading - 50);
+            p2 = new Point(0, reading - 75);
 
             //p2 = new Point(0, reading);
             G.setColor(Color.black);

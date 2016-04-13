@@ -18,6 +18,5 @@ public class HealthMonitor {
      */
     public static void main(String[] args) {
         mainFrame theFrame = new mainFrame();
-        
-        }
     }
+}

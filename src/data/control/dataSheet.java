@@ -211,8 +211,6 @@ public class dataSheet {
     }
 
     void update(ArrayList<Patient> patients) {
-        System.out.println("Rows: " + fetchRows().size());
-        System.out.println("patients: " + patients.size());
 
         // deleting the old rows
         ArrayList<Row> theRows = fetchRows();

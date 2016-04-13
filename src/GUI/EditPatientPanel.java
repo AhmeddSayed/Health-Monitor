@@ -5,12 +5,10 @@
  */
 package GUI;
 
-import ECG.ecgDrawPanel;
 import data.control.Patient;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 

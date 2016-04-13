@@ -7,10 +7,17 @@ package GUI;
 
 import data.control.Patient;
 import java.awt.Button;
+import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -24,6 +31,9 @@ public class HomePanel extends javax.swing.JPanel {
     //ecgDrawPanel ecgPanel;
     boolean isOnScreen = false;
     SwingWorker worker1, worker2;
+    boolean alarmIsReviewed = false;
+    Alarm theAlarm = new Alarm();
+    int minimumHeartRate = 45, maximumHeartRate = 190;
 
     /**
      * Creates new form HomeCard
@@ -50,6 +60,7 @@ public class HomePanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         editPatient1 = new javax.swing.JButton();
         deletePatient1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
         monitor2 = new javax.swing.JPanel();
         patient2 = new javax.swing.JLabel();
         ecgDrawPanel2 = new ECG.ecgDrawPanel();
@@ -57,6 +68,7 @@ public class HomePanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         editPatient2 = new javax.swing.JButton();
         deletePatient2 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
         monitor3 = new javax.swing.JPanel();
         patient3 = new javax.swing.JLabel();
         ecgDrawPanel3 = new ECG.ecgDrawPanel();
@@ -116,34 +128,36 @@ public class HomePanel extends javax.swing.JPanel {
         monitor1Layout.setHorizontalGroup(
             monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(monitor1Layout.createSequentialGroup()
-                .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(monitor1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ecgDrawPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
-                    .addGroup(monitor1Layout.createSequentialGroup()
-                        .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(monitor1Layout.createSequentialGroup()
-                                .addComponent(editPatient1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deletePatient1))
-                            .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(monitor1Layout.createSequentialGroup()
-                                    .addGap(99, 99, 99)
-                                    .addComponent(patient1))
-                                .addGroup(monitor1Layout.createSequentialGroup()
-                                    .addGap(33, 33, 33)
-                                    .addComponent(jLabel1)
-                                    .addGap(39, 39, 39)
-                                    .addComponent(patient1Temp, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 79, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(ecgDrawPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(monitor1Layout.createSequentialGroup()
+                .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(monitor1Layout.createSequentialGroup()
+                        .addComponent(editPatient1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deletePatient1))
+                    .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(monitor1Layout.createSequentialGroup()
+                            .addGap(99, 99, 99)
+                            .addComponent(patient1))
+                        .addGroup(monitor1Layout.createSequentialGroup()
+                            .addGap(33, 33, 33)
+                            .addComponent(jLabel1)
+                            .addGap(39, 39, 39)
+                            .addComponent(patient1Temp, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         monitor1Layout.setVerticalGroup(
             monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(monitor1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(patient1)
-                .addGap(28, 28, 28)
+                .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(monitor1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(patient1))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ecgDrawPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -198,31 +212,36 @@ public class HomePanel extends javax.swing.JPanel {
                 .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(monitor2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ecgDrawPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
+                        .addComponent(ecgDrawPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
                     .addGroup(monitor2Layout.createSequentialGroup()
-                        .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(monitor2Layout.createSequentialGroup()
-                                .addComponent(editPatient2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deletePatient2))
-                            .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(monitor2Layout.createSequentialGroup()
-                                    .addGap(99, 99, 99)
-                                    .addComponent(patient2))
-                                .addGroup(monitor2Layout.createSequentialGroup()
-                                    .addGap(33, 33, 33)
-                                    .addComponent(jLabel2)
-                                    .addGap(39, 39, 39)
-                                    .addComponent(patient2Temp, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 55, Short.MAX_VALUE)))
+                                    .addComponent(editPatient2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(deletePatient2))
+                                .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(monitor2Layout.createSequentialGroup()
+                                        .addGap(99, 99, 99)
+                                        .addComponent(patient2))
+                                    .addGroup(monitor2Layout.createSequentialGroup()
+                                        .addGap(33, 33, 33)
+                                        .addComponent(jLabel2)
+                                        .addGap(39, 39, 39)
+                                        .addComponent(patient2Temp, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 60, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         monitor2Layout.setVerticalGroup(
             monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(monitor2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(patient2)
-                .addGap(28, 28, 28)
+                .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(monitor2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(patient2))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ecgDrawPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -251,7 +270,12 @@ public class HomePanel extends javax.swing.JPanel {
             .addGap(0, 92, Short.MAX_VALUE)
         );
 
-        patient1Temp1.setText("jTextField1");
+        patient1Temp1.setText("No Input");
+        patient1Temp1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                patient1Temp1ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Tempreature:");
 
@@ -275,19 +299,21 @@ public class HomePanel extends javax.swing.JPanel {
             monitor3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(monitor3Layout.createSequentialGroup()
                 .addGroup(monitor3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, monitor3Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel4)
+                        .addGap(36, 36, 36)
+                        .addComponent(patient1Temp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(monitor3Layout.createSequentialGroup()
-                        .addComponent(editPatient3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deletePatient3))
-                    .addGroup(monitor3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(monitor3Layout.createSequentialGroup()
-                            .addGap(99, 99, 99)
-                            .addComponent(patient3))
-                        .addGroup(monitor3Layout.createSequentialGroup()
-                            .addGap(33, 33, 33)
-                            .addComponent(jLabel4)
-                            .addGap(39, 39, 39)
-                            .addComponent(patient1Temp1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(74, 74, 74)
+                        .addGroup(monitor3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(monitor3Layout.createSequentialGroup()
+                                .addComponent(editPatient3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deletePatient3))
+                            .addGroup(monitor3Layout.createSequentialGroup()
+                                .addComponent(patient3)
+                                .addGap(54, 54, 54)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(monitor3Layout.createSequentialGroup()
                 .addContainerGap()
@@ -328,7 +354,7 @@ public class HomePanel extends javax.swing.JPanel {
             .addGap(0, 92, Short.MAX_VALUE)
         );
 
-        patient2Temp1.setText("jTextField1");
+        patient2Temp1.setText("No Input");
 
         jLabel5.setText("Tempreature:");
 
@@ -357,20 +383,23 @@ public class HomePanel extends javax.swing.JPanel {
                         .addComponent(ecgDrawPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
                     .addGroup(monitor4Layout.createSequentialGroup()
                         .addGroup(monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, monitor4Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel5)
+                                .addGap(39, 39, 39)
+                                .addComponent(patient2Temp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(monitor4Layout.createSequentialGroup()
-                                .addComponent(editPatient4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deletePatient4))
-                            .addGroup(monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(monitor4Layout.createSequentialGroup()
-                                    .addGap(99, 99, 99)
-                                    .addComponent(patient4))
-                                .addGroup(monitor4Layout.createSequentialGroup()
-                                    .addGap(33, 33, 33)
-                                    .addComponent(jLabel5)
-                                    .addGap(39, 39, 39)
-                                    .addComponent(patient2Temp1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 55, Short.MAX_VALUE)))
+                                .addGap(74, 74, 74)
+                                .addGroup(monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(monitor4Layout.createSequentialGroup()
+                                        .addComponent(editPatient4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(deletePatient4)
+                                        .addGap(3, 3, 3))
+                                    .addGroup(monitor4Layout.createSequentialGroup()
+                                        .addComponent(patient4)
+                                        .addGap(57, 57, 57)))))
+                        .addGap(0, 52, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         monitor4Layout.setVerticalGroup(
@@ -478,6 +507,10 @@ public class HomePanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_deletePatient4ActionPerformed
 
+    private void patient1Temp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patient1Temp1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_patient1Temp1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deletePatient1;
@@ -497,6 +530,8 @@ public class HomePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel monitor1;
     private javax.swing.JPanel monitor2;
     private javax.swing.JPanel monitor3;
@@ -514,25 +549,65 @@ public class HomePanel extends javax.swing.JPanel {
     private javax.swing.JSeparator separator34;
     // End of variables declaration//GEN-END:variables
     private void init() {
+
         this.initComponents();
         this.patient1Temp.setEditable(false);
         this.patient2Temp.setEditable(false);
+        ImageIcon imageIcon = new ImageIcon(("src/resources/images/1.gif"));
+        this.jLabel6.setIcon(imageIcon);
+        this.jLabel6.setVisible(false);
+        this.jLabel7.setIcon(imageIcon);
+        this.jLabel7.setVisible(false);
+
     }
 
     public void displayChart() {
+
         worker1 = new SwingWorker() {
 
             @Override
             protected Object doInBackground() throws Exception {
+
                 if (!isCancelled()) {
+                    // checking that it's a stable condition
+                    int alarmCount = 0;
+
                     while (true && !isCancelled()) {
-                        int rand = (int) (Math.random() * 100);
-                        patient1Temp.setText(String.valueOf(rand));
-                        ecgDrawPanel1.move_1(rand);
+                        // TODO: getting data from serial usb
+                        int heartRate = (int) (Math.random() * 100);
+                        patient1Temp.setText(String.valueOf(heartRate));
+
+                        if (heartRate < minimumHeartRate || heartRate > maximumHeartRate) {
+                            if (alarmCount < 5) {
+                                alarmCount++;
+                            } else {
+                                alarmCount = 0;
+                                // if the alarm is not triggered, trigger it
+                                if (!theAlarm.isTriggered(1)) {
+                                    theAlarm.trigger(1);
+                                    alarmIsReviewed = false;
+
+                                    displayAlarmMessage(1);
+                                    while (!alarmIsReviewed) {
+                                        Thread.sleep(10);
+                                    }
+
+                                }
+                            }
+                        } else {
+                            alarmCount = 0;
+                            // if the alarm is triggered, shut it off
+                            if (theAlarm.isTriggered(1)) {
+                                theAlarm.stop(1);
+                            }
+                            ecgDrawPanel1.move_1(heartRate);
+                        }
+
                     }
                 }
                 return null;
             }
+
         };
 
         worker2 = new SwingWorker() {
@@ -540,10 +615,36 @@ public class HomePanel extends javax.swing.JPanel {
             @Override
             protected Object doInBackground() throws Exception {
                 if (!isCancelled()) {
+                    int alarmCount = 0;
                     while (true && !isCancelled()) {
-                        int rand = (int) (Math.random() * 100);
-                        patient2Temp.setText(String.valueOf(rand));
-                        ecgDrawPanel2.move_1(rand);
+                        // TODO: getting data from serial usb
+                        int heartRate = (int) (Math.random() * 100);
+                        patient2Temp.setText(String.valueOf(heartRate));
+
+                        if (heartRate < minimumHeartRate || heartRate > maximumHeartRate) {
+                            if (alarmCount < 5) {
+                                alarmCount++;
+                            } else {
+                                alarmCount = 0;
+                                // if the alarm is not triggered, trigger it
+                                if (!theAlarm.isTriggered(2)) {
+                                    theAlarm.trigger(2);
+                                    alarmIsReviewed = false;
+                                    displayAlarmMessage(2);
+                                    while (!alarmIsReviewed) {
+                                        Thread.sleep(10);
+                                    }
+                                }
+                            }
+                        } else {
+                            alarmCount = 0;
+                            // if the alarm is triggered, shut it off
+                            if (theAlarm.isTriggered(2)) {
+                                theAlarm.stop(2);
+                            }
+                            ecgDrawPanel2.move_1(heartRate);
+                        }
+
                     }
                 }
                 return null;
@@ -558,6 +659,31 @@ public class HomePanel extends javax.swing.JPanel {
             worker2.cancel(true);
         }
 
+    }
+
+    private void displayAlarmMessage(int patientID) {
+        if (patientID == 1) {
+            jLabel7.setVisible(true);
+        } else {
+            jLabel6.setVisible(true);
+        }
+        Object[] options = {"OK"};
+        int input = JOptionPane.showOptionDialog(this,
+                "Patient " + patientID + " shows a very low heart rate!", " Alarm!",
+                JOptionPane.PLAIN_MESSAGE,
+                JOptionPane.ERROR_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        if (input == JOptionPane.OK_OPTION || input == -1) {
+            this.alarmIsReviewed = true;
+            if (patientID == 1) {
+                jLabel7.setVisible(false);
+            } else {
+                jLabel6.setVisible(false);
+            }
+        }
     }
 
     public void setOnScreenFlag() {
@@ -577,8 +703,8 @@ public class HomePanel extends javax.swing.JPanel {
         // reading the patients, and updating the monitor with patient data
 
         for (Patient aPatient : thePatients) {
-           // aPatient.printAll();
-            
+            // aPatient.printAll();
+
             switch (aPatient.getId()) {
                 case 1:
                     this.patient1.setText(aPatient.getName());
