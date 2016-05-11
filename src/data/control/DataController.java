@@ -22,19 +22,27 @@ public class DataController {
         loadPatients();
     }
 
-    private void getInput() {
+    public void getInput() {
         // initialize database, load all data in memory as Patients
         // initialize datainput from serial port
         // setup automated data refresh
 
-        /*
-         while (true) {
-         String message = s.read(); 
-         if (!message.equals("") && !message.isEmpty()) {
-         System.out.println(message);
-         }
-         }
-         */
+        while (true) {
+            String message = input.read();
+            if (!message.equals("") && !message.isEmpty()) {
+                switch (message.split(":")[2]) {
+                    case "1":
+                        this.patients.get(0).setBPM(Integer.valueOf(message.split(":")[1]));
+                        this.patients.get(0).setTemp(Float.valueOf(message.split(":")[0]));
+                        break;
+                    case "2":
+                    default:
+                        this.patients.get(1).setBPM(Integer.valueOf(message.split(":")[1]));
+                        this.patients.get(1).setTemp(Float.valueOf(message.split(":")[0]));
+                        break;
+                }
+            }
+        }
     }
 
     /*
@@ -44,10 +52,6 @@ public class DataController {
      */
     private void loadPatients() {
         this.patients = dataSheet.getPatients();
-    }
-
-    private void updateFromInput() {
-
     }
 
     public ArrayList<Patient> getPatients() {
@@ -61,6 +65,26 @@ public class DataController {
     public void update(ArrayList<Patient> allPatients) {
         this.patients = allPatients;
         dataSheet.update(patients);
+    }
+
+    public int getBPM(int i) {
+        this.getInput();
+        if (String.valueOf(this.patients.get(i - 1).getBPM()).isEmpty()) {
+            return 0;
+        } else {
+            return this.patients.get(i - 1).getBPM();
+
+        }
+    }
+
+    public Float getTemp(int i) {
+        this.getInput();
+
+        if (this.patients.get(i).getTemp().toString().isEmpty()) {
+            return new Float(0);
+        } else {
+            return this.patients.get(i).getTemp();
+        }
     }
 
 }

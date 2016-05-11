@@ -19,11 +19,12 @@ public class Patient {
     String name;
     ArrayList<Double> heartRate = new ArrayList();
     ArrayList<Double> tempreature = new ArrayList();
-    String dateAdded;
-    String lastUpdated;
-    String lastAlarm;
     String sex;
     int age;
+    Date dateCreated, lastUpdated, lastAlarm;
+    Float Temp;
+    int BPM;
+    String bloodType;
 
     public void setID(int id) {
         this.id = id;
@@ -61,21 +62,15 @@ public class Patient {
     }
 
     public void setDateAdded(Date dateAdded) {
-        this.dateAdded = normalizeDate(dateAdded);
+        this.dateCreated = dateAdded;
     }
 
     public void setLastUpdated(Date lastUpdated) {
-        this.lastUpdated = normalizeDate(lastUpdated);
+        this.lastUpdated = lastUpdated;
     }
 
     public void setLastAlarm(Date lastAlarm) {
-        this.lastAlarm = normalizeDate(lastAlarm);
-    }
-
-    private String normalizeDate(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        return dateFormat.format(date);
-
+        this.lastAlarm = lastAlarm;
     }
 
     public void printAll() {
@@ -83,11 +78,12 @@ public class Patient {
         System.out.println("Name: " + this.name);
         System.out.println("Rate: " + this.heartRate.toString());
         System.out.println("Temp: " + this.tempreature.toString());
-        System.out.println("dateAdded: " + this.dateAdded);
+        System.out.println("dateAdded: " + this.dateCreated.toString());
         System.out.println("last: " + this.lastUpdated);
         System.out.println("Alarm: " + this.lastAlarm);
         System.out.println("Sex: " + this.sex);
         System.out.println("age: " + this.age);
+        System.out.println("blood: " + this.bloodType);
         System.out.println("----------------------------");
     }
 
@@ -106,4 +102,41 @@ public class Patient {
     public String getSex() {
         return this.sex;
     }
+
+    public void setTemp(Float newTemp) {
+        this.Temp = newTemp;
+    }
+
+    public void setBPM(int newBPM) {
+        this.BPM = newBPM;
+    }
+
+    public Float getTemp() {
+        return this.Temp;
+    }
+
+    public int getBPM() {
+        return this.BPM;
+    }
+
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
+    }
+
+    public String getBloodType() {
+        return this.bloodType;
+    }
+
+    public Date getLastModified() {
+        return this.lastUpdated;
+    }
+
+    public Date getLastAlarmed() {
+        return this.lastAlarm;
+    }
+
+    public Date getDateCreated() {
+        return this.dateCreated;
+    }
+
 }

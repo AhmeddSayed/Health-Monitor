@@ -6,6 +6,7 @@
 package GUI;
 
 import data.control.Patient;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -27,6 +28,16 @@ public class EditPatientPanel extends JPanel {
      */
     public EditPatientPanel() {
         initComponents();
+
+        this.bloodTypeSelection.removeAllItems();
+        this.bloodTypeSelection.addItem("O+");
+        this.bloodTypeSelection.addItem("O-");
+        this.bloodTypeSelection.addItem("A+");
+        this.bloodTypeSelection.addItem("A-");
+        this.bloodTypeSelection.addItem("B+");
+        this.bloodTypeSelection.addItem("B-");
+        this.bloodTypeSelection.addItem("AB+");
+        this.bloodTypeSelection.addItem("AB-");
 
         this.nameTextField.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -96,6 +107,8 @@ public class EditPatientPanel extends JPanel {
         jLabel3 = new javax.swing.JLabel();
         maleRadioButton = new javax.swing.JRadioButton();
         femaleRadioButton = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
+        bloodTypeSelection = new javax.swing.JComboBox<>();
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -140,20 +153,26 @@ public class EditPatientPanel extends JPanel {
         sexButtonGroup.add(femaleRadioButton);
         femaleRadioButton.setText("Female");
 
+        jLabel4.setText("Blood Type:");
+
+        bloodTypeSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bloodTypeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                        .addComponent(ageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
                         .addGap(193, 193, 193))
                     .addComponent(nameTextField)
                     .addGroup(layout.createSequentialGroup()
@@ -170,7 +189,7 @@ public class EditPatientPanel extends JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(femaleRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(30, 30, 30)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +211,11 @@ public class EditPatientPanel extends JPanel {
                     .addComponent(maleRadioButton)
                     .addComponent(femaleRadioButton)
                     .addComponent(jLabel3))
-                .addGap(80, 80, 80)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(bloodTypeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
                     .addComponent(savePatientButton))
@@ -239,11 +262,13 @@ public class EditPatientPanel extends JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ageTextField;
+    private javax.swing.JComboBox<String> bloodTypeSelection;
     private javax.swing.JButton cancelButton;
     private javax.swing.JRadioButton femaleRadioButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JRadioButton maleRadioButton;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JButton savePatientButton;
@@ -266,6 +291,8 @@ public class EditPatientPanel extends JPanel {
     private void updatePatient() {
         thisPatient.setName(this.nameTextField.getText());
         thisPatient.setAge(Integer.valueOf(this.ageTextField.getText()));
+        thisPatient.setBloodType(bloodTypeSelection.getSelectedItem().toString());
+        thisPatient.setLastUpdated(new Date());
 
         if (this.maleRadioButton.isSelected()) {
             thisPatient.setSex("male");
@@ -274,5 +301,6 @@ public class EditPatientPanel extends JPanel {
         }
         mainFrame theFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
         theFrame.updatePatients(thisPatient);
+        
     }
 }

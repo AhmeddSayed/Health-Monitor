@@ -13,24 +13,20 @@ package data.control;
 /* Imports */
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.DirectoryNotEmptyException;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /*
@@ -41,9 +37,9 @@ public class dataSheet {
 
     // setting class variables
     String excelFilePath = "src//data//control//patients.xlsx";
-    Sheet firstSheet;
+    XSSFSheet firstSheet;
     FileInputStream inputStream;
-    Workbook workbook;
+    XSSFWorkbook theWorkbook;
 
     /*
      *  function that initiates database connection
@@ -52,10 +48,11 @@ public class dataSheet {
         try {
             // loading the file as an input stream
             inputStream = new FileInputStream(new File(excelFilePath));
+
             // reading the input stream as a workbook excel file
-            workbook = new XSSFWorkbook(inputStream);
+            theWorkbook = new XSSFWorkbook(inputStream);
             // Getting the first sheet
-            firstSheet = workbook.getSheetAt(0);
+            firstSheet = theWorkbook.getSheetAt(0);
 
         } catch (IOException ex) {
             Logger.getLogger(dataSheet.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,16 +60,16 @@ public class dataSheet {
 
     }
 
-    public ArrayList<Row> fetchRows() {
+    public ArrayList<XSSFRow> fetchRows() {
         // variable that holds all rows in the sheet
-        ArrayList<Row> allRows = new ArrayList();
+        ArrayList<XSSFRow> allRows = new ArrayList();
 
         // looping through the rows (each row = a patient)
         Iterator<Row> iterator = firstSheet.iterator();
 
         while (iterator.hasNext()) {
             // reading the row
-            allRows.add(iterator.next());
+            allRows.add((XSSFRow) iterator.next());
         }
         // return all rows in the sheet
         return allRows;
@@ -81,7 +78,6 @@ public class dataSheet {
     public void closeConnection() {
         try {
             // done reading data
-            workbook.close();
             inputStream.close();
 
         } catch (IOException ex) {
@@ -89,56 +85,115 @@ public class dataSheet {
         }
     }
 
-    public void addPatient(Patient newPatient) {
-        // connect to the databse
-        connect();
+    private void newPatient(Patient newPatient) {
+
+        XSSFRow newRow;
         // creating a new row
-        Row newRow = firstSheet.createRow(newPatient.getId() - 1);
+        if (firstSheet.getRow(newPatient.getId()) == null) {
+            newRow = firstSheet.createRow(newPatient.getId());
+        } else {
+            newRow = firstSheet.getRow(newPatient.getId());
+        }
 
         // creating a new cell
-        Cell cell = newRow.createCell(0);
+        XSSFCell cell = newRow.getCell(0);
+        if (cell == null) {
+            cell = newRow.createCell(0);
+        }
 
         // adding the patient ID
         cell.setCellValue(newPatient.getId());
 
         // adding the patient Name
-        cell = newRow.createCell(1);
+        // creating a new cell
+        cell = newRow.getCell(1);
+        if (cell == null) {
+            cell = newRow.createCell(1);
+        }
         cell.setCellValue(newPatient.getName());
 
-        // adding the patient dataAdded
-        CellStyle cellStyle = workbook.createCellStyle();
-        CreationHelper createHelper = workbook.getCreationHelper();
-        cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("d/m/yy hh:mm"));
-        cell = newRow.createCell(12);
-
-        cell.setCellValue(new Date());
-        cell.setCellStyle(cellStyle);
+        // adding the patient blood type
+        cell = newRow.getCell(12);
+        if (cell == null) {
+            cell = newRow.createCell(12);
+        }
+        cell.setCellValue(newPatient.getBloodType());
 
         // adding the patient sex
-        cell = newRow.createCell(15);
+        cell = newRow.getCell(13);
+        if (cell == null) {
+            cell = newRow.createCell(13);
+        }
         cell.setCellValue(newPatient.getSex());
 
         // adding the patient age
-        cell = newRow.createCell(16);
+        cell = newRow.getCell(14);
+        if (cell == null) {
+            cell = newRow.createCell(14);
+        }
         cell.setCellValue(newPatient.getAge());
 
-        saveToDisk();
+        // setting up the date format
+        XSSFCellStyle cellStyle = theWorkbook.createCellStyle();
+        CreationHelper createHelper = theWorkbook.getCreationHelper();
+        cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("d/m/yy hh:mm:ss"));
+
+        // adding the patient dateAdded
+        cell = newRow.getCell(15);
+        if (cell == null) {
+            cell = newRow.createCell(15);
+        }
+
+        if (newPatient.getDateCreated() != null) {
+            cell.setCellValue(newPatient.getDateCreated());
+        } else {
+            cell.setCellValue(new Date());
+        }
+        cell.setCellStyle(cellStyle);
+
+        // adding the date modified
+        if (newPatient.getLastModified() != null) {
+            cell = newRow.getCell(16);
+            if (cell == null) {
+                cell = newRow.createCell(16);
+            }
+            cell.setCellValue(newPatient.getLastModified());
+            cell.setCellStyle(cellStyle);
+        }
+
+        // adding the lastAlarm
+        if (newPatient.getLastAlarmed() != null) {
+            cell = newRow.getCell(17);
+            if (cell == null) {
+                cell = newRow.createCell(17);
+            }
+            cell.setCellValue(newPatient.getLastAlarmed());
+            cell.setCellStyle(cellStyle);
+        }
 
     }
 
     public ArrayList<Patient> getPatients() {
-        ArrayList<Row> theRows;
+        ArrayList<XSSFRow> theRows;
         ArrayList<Patient> thePatients = new ArrayList();
+        boolean firstRowSkipped = false;
 
         connect();
         theRows = fetchRows();
 
         // looping through the rows
-        Iterator<Row> rowIterator = theRows.iterator();
+        Iterator<XSSFRow> rowIterator = theRows.iterator();
 
         while (rowIterator.hasNext()) {
+
             // reading the row
             Row aRow = rowIterator.next();
+
+            if (!firstRowSkipped) {
+                firstRowSkipped = true;
+                continue;
+            }
+
             Patient aPatient = new Patient();
 
             // loading the cells
@@ -175,25 +230,29 @@ public class dataSheet {
                             aPatient.addTempreature(cell.getNumericCellValue());
                             break;
                         case 12:
-                            // date_added
-                            aPatient.setDateAdded(cell.getDateCellValue());
+                            // blood_type
+                            aPatient.setBloodType(cell.getStringCellValue());
+
                             break;
                         case 13:
-                            // last_updated
-                            aPatient.setLastUpdated(cell.getDateCellValue());
-                            break;
-                        case 14:
-                            // last_alarmed
-                            aPatient.setLastAlarm(cell.getDateCellValue());
-                            break;
-                        case 15:
                             // sex
                             aPatient.setSex(cell.getStringCellValue());
                             break;
-                        case 16:
+                        case 14:
                             // age
                             aPatient.setAge((int) cell.getNumericCellValue());
                             break;
+                        case 15:
+                            // date_added
+                            aPatient.setDateAdded(cell.getDateCellValue());
+                            break;
+                        case 16:
+                            // last_updated
+                            aPatient.setLastUpdated(cell.getDateCellValue());
+                            break;
+                        case 17:
+                            // last_alarmed
+                            aPatient.setLastAlarm(cell.getDateCellValue());
                         default:
                             break;
                     }
@@ -212,32 +271,42 @@ public class dataSheet {
 
     void update(ArrayList<Patient> patients) {
 
-        // deleting the old rows
-        ArrayList<Row> theRows = fetchRows();
-        // looping through the rows
-        Iterator<Row> rowIterator = theRows.iterator();
+        // Getting the first sheet
+        firstSheet = theWorkbook.getSheetAt(0);
 
-        while (rowIterator.hasNext()) {
-            firstSheet.removeRow(rowIterator.next());
+        // looping through the rows
+        for (int i = 1; i <= firstSheet.getLastRowNum(); i++) {
+            // clearing data
+            XSSFRow row = firstSheet.getRow(i);
+            firstSheet.removeRow(row);
         }
-        saveToDisk();
-        
+
         // adding patients again
         for (Patient patientX : patients) {
-            addPatient(patientX);
+            newPatient(patientX);
         }
+
+        saveToDisk();
+
     }
 
     private void saveToDisk() {
         // saving to disk
+        FileOutputStream fileOut;
         try {
-            inputStream.close();
-            FileOutputStream fileOut = new FileOutputStream(excelFilePath);
-            workbook.write(fileOut);
+            closeConnection();
+            fileOut = new FileOutputStream(excelFilePath);
+            theWorkbook.write(fileOut);
+            //theWorkbook.close();
             fileOut.close();
 
         } catch (IOException ex) {
             Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void addPatient(Patient aPatient) {
+        this.newPatient(aPatient);
+        saveToDisk();
     }
 }
