@@ -22,8 +22,8 @@ public class Patient {
     String sex;
     int age;
     Date dateCreated, lastUpdated, lastAlarm;
-    Float Temp;
-    int BPM;
+    Float Temp = new Float(0);
+    int BPM = 0;
     String bloodType;
 
     public void setID(int id) {

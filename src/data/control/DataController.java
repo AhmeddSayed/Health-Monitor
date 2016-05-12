@@ -26,24 +26,29 @@ public class DataController {
         // initialize database, load all data in memory as Patients
         // initialize datainput from serial port
         // setup automated data refresh
+        String message = input.read();
 
-        while (true) {
-            String message = input.read();
-            if (!message.equals("") && !message.isEmpty()) {
-                switch (message.split(":")[2]) {
-                    case "1":
-                        this.patients.get(0).setBPM(Integer.valueOf(message.split(":")[1]));
-                        this.patients.get(0).setTemp(Float.valueOf(message.split(":")[0]));
-                        break;
-                    case "2":
-                    default:
-                        this.patients.get(1).setBPM(Integer.valueOf(message.split(":")[1]));
-                        this.patients.get(1).setTemp(Float.valueOf(message.split(":")[0]));
-                        break;
-                }
+        //System.out.println("here " + message);
+        if (!message.equals("") && message != null && !message.isEmpty() && message.split(":").length >= 2) {
+            //System.out.println(message);
+
+            System.out.println("Message is: " + message);
+
+            switch (message.split(":")[2]) {
+                case "1":
+                    this.patients.get(0).setBPM(Integer.valueOf(message.split(":")[1]));
+                    this.patients.get(0).setTemp(Float.valueOf(message.split(":")[0]));
+                    break;
+                case "2":
+                    this.patients.get(1).setBPM(Integer.valueOf(message.split(":")[1]));
+                    this.patients.get(1).setTemp(Float.valueOf(message.split(":")[0]));
+                    break;
+                default:
+                    break;
             }
         }
     }
+
 
     /*
      *  Function that loads the patients from database into memory
@@ -69,22 +74,14 @@ public class DataController {
 
     public int getBPM(int i) {
         this.getInput();
-        if (String.valueOf(this.patients.get(i - 1).getBPM()).isEmpty()) {
-            return 0;
-        } else {
-            return this.patients.get(i - 1).getBPM();
+        return this.patients.get(i - 1).getBPM();
 
-        }
     }
 
     public Float getTemp(int i) {
         this.getInput();
+        return this.patients.get(i - 1).getTemp();
 
-        if (this.patients.get(i).getTemp().toString().isEmpty()) {
-            return new Float(0);
-        } else {
-            return this.patients.get(i).getTemp();
-        }
     }
 
 }

@@ -644,7 +644,7 @@ public class HomePanel extends javax.swing.JPanel {
                 if (!isCancelled()) {
                     // checking that it's a stable condition
                     int alarmCount = 0;
-                    theDataController.getInput();
+                    //theDataController.getInput();
 
                     while (true && !isCancelled()) {
 
@@ -653,6 +653,7 @@ public class HomePanel extends javax.swing.JPanel {
                         Float Temp = theDataController.getTemp(1);
                         patient1Temp.setText(String.valueOf(Temp));
                         patient1bpm.setText(String.valueOf(heartRate));
+                        ecgDrawPanel1.move_1(heartRate);
 
                         if (heartRate < minimumHeartRate || heartRate > maximumHeartRate) {
                             if (alarmCount < 5) {
@@ -666,7 +667,7 @@ public class HomePanel extends javax.swing.JPanel {
 
                                     displayAlarmMessage(1);
                                     while (!alarmIsReviewed) {
-                                        Thread.sleep(10);
+                                        Thread.sleep(1000);
                                     }
 
                                 }
@@ -677,7 +678,6 @@ public class HomePanel extends javax.swing.JPanel {
                             if (theAlarm.isTriggered(1)) {
                                 theAlarm.stop(1);
                             }
-                            ecgDrawPanel1.move_1(heartRate);
                         }
 
                     }
@@ -701,6 +701,7 @@ public class HomePanel extends javax.swing.JPanel {
                         Float Temp = theDataController.getTemp(2);
                         patient2Temp.setText(String.valueOf(Temp));
                         patient2bpm.setText(String.valueOf(heartRate));
+                        ecgDrawPanel2.move_1(heartRate);
 
                         if (heartRate < minimumHeartRate || heartRate > maximumHeartRate) {
                             if (alarmCount < 5) {
@@ -713,7 +714,7 @@ public class HomePanel extends javax.swing.JPanel {
                                     alarmIsReviewed = false;
                                     displayAlarmMessage(2);
                                     while (!alarmIsReviewed) {
-                                        Thread.sleep(10);
+                                        Thread.sleep(1000);
                                     }
                                 }
                             }
@@ -723,7 +724,6 @@ public class HomePanel extends javax.swing.JPanel {
                             if (theAlarm.isTriggered(2)) {
                                 theAlarm.stop(2);
                             }
-                            ecgDrawPanel2.move_1(heartRate);
                         }
 
                     }
@@ -760,6 +760,7 @@ public class HomePanel extends javax.swing.JPanel {
 
         if (input == JOptionPane.OK_OPTION || input == -1) {
             this.alarmIsReviewed = true;
+            this.theAlarm.stop(patientID);
             if (patientID == 1) {
                 jLabel7.setVisible(false);
             } else {

@@ -7,7 +7,9 @@ package port.input;
 
 import com.fazecast.jSerialComm.SerialPort;
 import java.io.InputStream;
-import java.util.Scanner;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import org.apache.poi.util.IOUtils;
 
 /**
  *
@@ -16,57 +18,68 @@ import java.util.Scanner;
  */
 public class DataInput {
 
+    private static final byte DELIMITER = '\n';
+
     boolean shouldExit = false;
-    SerialPort comPort;
-
-    public DataInput() {
-
-        if (SerialPort.getCommPorts().length > 0) {
-            // Choosing the active port
-            comPort = SerialPort.getCommPorts()[0];
-
-            // setting the default baud rate
-            comPort.setBaudRate(57600);
-
-            // openning the port
-            comPort.openPort();
-
-            //setting the timeouts to conserve memory and proceccing power
-            comPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 100, 0);
-        }
-    }
 
     public String read() {
+        // Choosing the active port
+        SerialPort comPort = SerialPort.getCommPorts()[0];
+
+        // setting the default baud rate
+        comPort.setBaudRate(57600);
+
+        // for testing
+        //System.out.println("P: " + comPort.getDescriptivePortName() + " rate " + comPort.getBaudRate());
+        // openning the port
+        comPort.openPort();
+
+        //setting the timeouts to conserve memory and proceccing power
+        comPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 100, 0);
+
+        char[] message = new char[11];
+        int messageIndex = 0;
 
         // reading data
         InputStream in = comPort.getInputStream();
-        try {
-            // if the shouldExit flag is set, do not continue
-            if (!shouldExit) {
-                // need more work when I have the real data
-                // TODO: update dleimiter and string validation
-                Scanner theScanner = new Scanner(in, "UTF-8").useDelimiter("\n");
 
-                if (theScanner.hasNext()) {
-                    return theScanner.next();
+        try {
+
+            while (messageIndex < 11 && !shouldExit) {
+                // if the shouldExit flag is set, do not continue
+                if (in != null) {
+
+                    message[messageIndex] = (char) in.read();
+
+                    if (message[messageIndex] == DELIMITER) {
+                        break;
+                    }
+
+                    messageIndex++;
+
+                    //System.out.print((char) in.read());
+                    //theMessage.concat(String.valueOf((char) in.read))
                 } else {
-                    return "";
+                    messageIndex = 0;
+                    break;
                 }
-            } else {
-                // close the input stream
-                in.close();
-                this.closeConnection();
-                return "";
             }
+            // close the input stream
+            if (in != null) {
+                in.close();
+            }
+
         } catch (Exception e) {
-            return "";
+            e.printStackTrace();
         }
+
+        // done, closing port
+        comPort.closePort();
+        return new String(message);
     }
 
     public void closeConnection() {
         // setting the should exit flag
         this.shouldExit = true;
-        // done, closing port
-        comPort.closePort();
     }
 }
