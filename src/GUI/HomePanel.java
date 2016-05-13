@@ -645,38 +645,46 @@ public class HomePanel extends javax.swing.JPanel {
                     // checking that it's a stable condition
                     int alarmCount = 0;
                     //theDataController.getInput();
+                    int oldvalue = -1;
 
                     while (true && !isCancelled()) {
 
-                        // getting data from usb
                         int heartRate = theDataController.getBPM(1);
                         Float Temp = theDataController.getTemp(1);
+
+                        if (oldvalue == -1) {
+                            oldvalue = heartRate;
+                        }
+                        // getting data from usb
+
                         patient1Temp.setText(String.valueOf(Temp));
                         patient1bpm.setText(String.valueOf(heartRate));
-                        ecgDrawPanel1.move_1(heartRate);
+                        ecgDrawPanel1.move_1(heartRate / 4);
+                        if (heartRate != 0 && oldvalue != heartRate) {
+                            oldvalue = heartRate;
+                            if (heartRate < minimumHeartRate || heartRate > maximumHeartRate) {
+                                if (alarmCount < 5) {
+                                    alarmCount++;
+                                } else {
+                                    alarmCount = 0;
+                                    // if the alarm is not triggered, trigger it
+                                    if (!theAlarm.isTriggered(1)) {
+                                        theAlarm.trigger(1);
+                                        alarmIsReviewed = false;
 
-                        if (heartRate < minimumHeartRate || heartRate > maximumHeartRate) {
-                            if (alarmCount < 5) {
-                                alarmCount++;
+                                        displayAlarmMessage(1);
+                                        while (!alarmIsReviewed) {
+                                            Thread.sleep(1000);
+                                        }
+
+                                    }
+                                }
                             } else {
                                 alarmCount = 0;
-                                // if the alarm is not triggered, trigger it
-                                if (!theAlarm.isTriggered(1)) {
-                                    theAlarm.trigger(1);
-                                    alarmIsReviewed = false;
-
-                                    displayAlarmMessage(1);
-                                    while (!alarmIsReviewed) {
-                                        Thread.sleep(1000);
-                                    }
-
+                                // if the alarm is triggered, shut it off
+                                if (theAlarm.isTriggered(1)) {
+                                    theAlarm.stop(1);
                                 }
-                            }
-                        } else {
-                            alarmCount = 0;
-                            // if the alarm is triggered, shut it off
-                            if (theAlarm.isTriggered(1)) {
-                                theAlarm.stop(1);
                             }
                         }
 
@@ -693,36 +701,45 @@ public class HomePanel extends javax.swing.JPanel {
             @Override
             protected Object doInBackground() throws Exception {
                 if (!isCancelled()) {
-                    int alarmCount = 0;
+                    int alarmCount = 0, oldvalue = -1;
                     while (true && !isCancelled()) {
 
                         // getting data from usb
                         int heartRate = theDataController.getBPM(2);
                         Float Temp = theDataController.getTemp(2);
+
+                        if (oldvalue == -1) {
+                            oldvalue = heartRate;
+                        }
+
                         patient2Temp.setText(String.valueOf(Temp));
                         patient2bpm.setText(String.valueOf(heartRate));
-                        ecgDrawPanel2.move_1(heartRate);
+                        ecgDrawPanel2.move_1(heartRate / 4);
 
-                        if (heartRate < minimumHeartRate || heartRate > maximumHeartRate) {
-                            if (alarmCount < 5) {
-                                alarmCount++;
-                            } else {
-                                alarmCount = 0;
-                                // if the alarm is not triggered, trigger it
-                                if (!theAlarm.isTriggered(2)) {
-                                    theAlarm.trigger(2);
-                                    alarmIsReviewed = false;
-                                    displayAlarmMessage(2);
-                                    while (!alarmIsReviewed) {
-                                        Thread.sleep(1000);
+                        if (heartRate != 0 && heartRate != oldvalue) {
+                            oldvalue = heartRate;
+
+                            if (heartRate < minimumHeartRate || heartRate > maximumHeartRate) {
+                                if (alarmCount < 5) {
+                                    alarmCount++;
+                                } else {
+                                    alarmCount = 0;
+                                    // if the alarm is not triggered, trigger it
+                                    if (!theAlarm.isTriggered(2)) {
+                                        theAlarm.trigger(2);
+                                        alarmIsReviewed = false;
+                                        displayAlarmMessage(2);
+                                        while (!alarmIsReviewed) {
+                                            Thread.sleep(1000);
+                                        }
                                     }
                                 }
-                            }
-                        } else {
-                            alarmCount = 0;
-                            // if the alarm is triggered, shut it off
-                            if (theAlarm.isTriggered(2)) {
-                                theAlarm.stop(2);
+                            } else {
+                                alarmCount = 0;
+                                // if the alarm is triggered, shut it off
+                                if (theAlarm.isTriggered(2)) {
+                                    theAlarm.stop(2);
+                                }
                             }
                         }
 
@@ -897,4 +914,5 @@ public class HomePanel extends javax.swing.JPanel {
         mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
         topFrame.deletePatient(id);
     }
+    
 }
