@@ -19,7 +19,7 @@ public class DataController {
     dataSheet dataSheet = new dataSheet();
     DataInput input = new DataInput();
     int patient1BPM = 0, patient2BPM = 0;
-    
+
     Float patient1Temp = new Float(0), patient2Temp = new Float(0);
 
     public DataController() {
@@ -55,19 +55,23 @@ public class DataController {
 
             switch (message.split(":")[2]) {
                 case "1":
-                    //this.patients.get(0).setBPM(Integer.valueOf(message.split(":")[1]));
-                    //this.patients.get(0).setTemp(Float.valueOf(message.split(":")[0]));
+                    this.patients.get(0).setBPM(Integer.valueOf(message.split(":")[1]));
+                    this.patients.get(0).setTemp(Float.valueOf(message.split(":")[0]));
+                    System.out.println(this.patients.get(0).getName() + " Temp: " + this.patients.get(0).getTemp() + "BPM: " + this.patients.get(0).getBPM());
                     this.patient1BPM = Integer.valueOf(message.split(":")[1]);
                     this.patient1Temp = Float.valueOf(message.split(":")[0]);
                     break;
                 case "2":
-                    //this.patients.get(1).setBPM(Integer.valueOf(message.split(":")[1]));
-                    //this.patients.get(1).setTemp(Float.valueOf(message.split(":")[0]));
+                default:
+
+                    this.patients.get(1).setBPM(Integer.valueOf(message.split(":")[1]));
+                    this.patients.get(1).setTemp(Float.valueOf(message.split(":")[0]));
+                    System.out.println(this.patients.get(1).getName() + " Temp: " + this.patients.get(1).getTemp() + "BPM: " + this.patients.get(1).getBPM());
+
                     this.patient2BPM = Integer.valueOf(message.split(":")[1]);
                     this.patient2Temp = Float.valueOf(message.split(":")[0]);
                     break;
-                default:
-                    break;
+
             }
         }
     }

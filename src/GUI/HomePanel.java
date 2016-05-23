@@ -27,6 +27,7 @@ public class HomePanel extends javax.swing.JPanel {
     boolean alarmIsReviewed = false;
     Alarm theAlarm = new Alarm();
     int minimumHeartRate = 45, maximumHeartRate = 190;
+    private Patient firstPatient, secondPatient;
 
     /**
      * Creates new form HomeCard
@@ -630,13 +631,14 @@ public class HomePanel extends javax.swing.JPanel {
         this.jLabel6.setVisible(false);
         this.jLabel7.setIcon(imageIcon);
         this.jLabel7.setVisible(false);
-
     }
 
     public void displayChart() {
+        DataController theDataController = new DataController();
+        this.firstPatient = theDataController.getPatients().get(0);
+        this.secondPatient = theDataController.getPatients().get(1);
 
         worker1 = new SwingWorker() {
-            DataController theDataController = new DataController();
 
             @Override
             protected Object doInBackground() throws Exception {
@@ -649,8 +651,10 @@ public class HomePanel extends javax.swing.JPanel {
 
                     while (true && !isCancelled()) {
 
-                        int heartRate = theDataController.getBPM(1);
-                        Float Temp = theDataController.getTemp(1);
+                        //int heartRate = theDataController.getBPM(1);
+                        //Float Temp = theDataController.getTemp(1);
+                        int heartRate = firstPatient.getBPM();
+                        Float Temp = firstPatient.getTemp();
 
                         if (oldvalue == -1) {
                             oldvalue = heartRate;
@@ -696,7 +700,6 @@ public class HomePanel extends javax.swing.JPanel {
         };
 
         worker2 = new SwingWorker() {
-            DataController theDataController = new DataController();
 
             @Override
             protected Object doInBackground() throws Exception {
@@ -705,8 +708,10 @@ public class HomePanel extends javax.swing.JPanel {
                     while (true && !isCancelled()) {
 
                         // getting data from usb
-                        int heartRate = theDataController.getBPM(2);
-                        Float Temp = theDataController.getTemp(2);
+                        //int heartRate = theDataController.getBPM(2);
+                        //Float Temp = theDataController.getTemp(2);
+                        int heartRate = secondPatient.getBPM();
+                        Float Temp = secondPatient.getTemp();
 
                         if (oldvalue == -1) {
                             oldvalue = heartRate;
@@ -914,5 +919,5 @@ public class HomePanel extends javax.swing.JPanel {
         mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
         topFrame.deletePatient(id);
     }
-    
+
 }

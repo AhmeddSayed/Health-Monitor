@@ -65,7 +65,7 @@ public class ecgDrawPanel extends javax.swing.JPanel {
             repaint();
             // allPoints.remove(0);
             if (!Thread.interrupted()) {
-                Thread.sleep(100);
+                Thread.sleep(500);
             }
         } catch (InterruptedException ex) {
         }
