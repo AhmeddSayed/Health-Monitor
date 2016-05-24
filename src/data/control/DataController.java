@@ -15,22 +15,26 @@ import port.input.DataInput;
  */
 public class DataController {
 
-    ArrayList<Patient> patients = new ArrayList();
+    volatile ArrayList<Patient> patients = new ArrayList();
     dataSheet dataSheet = new dataSheet();
     DataInput input = new DataInput();
-    int patient1BPM = 0, patient2BPM = 0;
-
-    Float patient1Temp = new Float(0), patient2Temp = new Float(0);
+    SwingWorker updateInput;
+    public volatile int patient1BPM = 0, patient2BPM = 0;
+    public volatile Float patient1Temp = new Float(0), patient2Temp = new Float(0);
 
     public DataController() {
         loadPatients();
 
-        SwingWorker updateInput = new SwingWorker() {
+        updateInput = new SwingWorker() {
+
             @Override
             protected Object doInBackground() throws Exception {
-                while (true) {
-                    getInput();
+                synchronized (patients) {
+                    while (true && !isCancelled()) {
+                        getInput();
+                    }
                 }
+                return null;
             }
         };
         try {
@@ -47,7 +51,6 @@ public class DataController {
         // setup automated data refresh
         String message = input.read();
 
-        //System.out.println("here " + message);
         if (!message.equals("") && message != null && !message.isEmpty() && message.split(":").length >= 2) {
             //System.out.println(message);
 
@@ -73,6 +76,7 @@ public class DataController {
                     break;
 
             }
+
         }
     }
 
@@ -91,12 +95,17 @@ public class DataController {
     }
 
     public void addPatient(Patient newPatient) {
+        updateInput.cancel(true);
         dataSheet.addPatient(newPatient);
+        updateInput.execute();
+
     }
 
     public void update(ArrayList<Patient> allPatients) {
+        updateInput.cancel(true);
         this.patients = allPatients;
         dataSheet.update(patients);
+        updateInput.execute();
     }
 
     public int getBPM(int i) {

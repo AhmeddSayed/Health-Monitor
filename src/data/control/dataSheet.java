@@ -112,6 +112,28 @@ public class dataSheet {
         }
         cell.setCellValue(newPatient.getName());
 
+        // adding BPM
+        if (!newPatient.getBPMArray().isEmpty()) {
+            int cellID = 2;
+
+            for (Iterator itr = newPatient.getBPMArray().iterator(); itr.hasNext();) {
+                cell = newRow.getCell(cellID);
+                cell.setCellValue((Double) itr.next());
+                cellID++;
+            }
+        }
+
+        // adding Tempreature
+        if (!newPatient.getTempArray().isEmpty()) {
+            int cellID = 7;
+
+            for (Iterator itr = newPatient.getTempArray().iterator(); itr.hasNext();) {
+                cell = newRow.getCell(cellID);
+                cell.setCellValue((Double) itr.next());
+                cellID++;
+            }
+        }
+
         // adding the patient blood type
         cell = newRow.getCell(12);
         if (cell == null) {

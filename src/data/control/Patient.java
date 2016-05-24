@@ -6,8 +6,10 @@
 package data.control;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
@@ -17,13 +19,13 @@ public class Patient {
 
     int id;
     String name;
-    ArrayList<Double> heartRate = new ArrayList();
-    ArrayList<Double> tempreature = new ArrayList();
+    volatile ArrayDeque<Double> heartRate = new ArrayDeque(5);
+    volatile ArrayDeque<Double> tempreature = new ArrayDeque(5);
     String sex;
     int age;
     Date dateCreated, lastUpdated, lastAlarm;
-    Float Temp = new Float(0);
-    int BPM = 0;
+    volatile Float Temp = new Float(0);
+    volatile int BPM = 0;
     String bloodType;
 
     public void setID(int id) {
@@ -44,19 +46,17 @@ public class Patient {
     }
 
     public void addHeartRate(double heartRate) {
-        // using the array list as a stack
-        if (this.heartRate.size() == 5) {
-            // if reached the size of 5, remove the first element
-            this.heartRate.remove(0);
+        // pop first added
+        if (!this.heartRate.isEmpty()) {
+            this.heartRate.remove();
         }
         this.heartRate.add(heartRate);
     }
 
     public void addTempreature(double tempreature) {
         // using the array list as a stack
-        if (this.tempreature.size() == 5) {
-            // if reached the size of 5, remove the first element
-            this.tempreature.remove(0);
+        if (!this.tempreature.isEmpty()) {
+            this.tempreature.remove();
         }
         this.tempreature.add(tempreature);
     }
@@ -104,11 +104,14 @@ public class Patient {
     }
 
     public void setTemp(Float newTemp) {
+
         this.Temp = newTemp;
+        //this.addTempreature(new Double(newTemp));
     }
 
     public void setBPM(int newBPM) {
         this.BPM = newBPM;
+        //this.addHeartRate(new Double(newBPM));
     }
 
     public Float getTemp() {
@@ -137,6 +140,14 @@ public class Patient {
 
     public Date getDateCreated() {
         return this.dateCreated;
+    }
+
+    public ArrayDeque<Double> getTempArray() {
+        return this.tempreature;
+    }
+
+    public ArrayDeque<Double> getBPMArray() {
+        return this.heartRate;
     }
 
 }

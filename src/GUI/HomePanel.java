@@ -9,6 +9,7 @@ import data.control.DataController;
 import data.control.Patient;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -25,17 +26,15 @@ public class HomePanel extends javax.swing.JPanel {
     boolean isOnScreen = false;
     SwingWorker worker1, worker2;
     boolean alarmIsReviewed = false;
-    Alarm theAlarm = new Alarm();
-    int minimumHeartRate = 45, maximumHeartRate = 190;
-    private Patient firstPatient, secondPatient;
+    volatile Alarm theAlarm = new Alarm();
+    int minimumHeartRate, maximumHeartRate;
+    volatile private Patient firstPatient, secondPatient;
 
     /**
      * Creates new form HomeCard
      */
     public HomePanel() {
-
         init();
-
     }
 
     /**
@@ -644,54 +643,61 @@ public class HomePanel extends javax.swing.JPanel {
             protected Object doInBackground() throws Exception {
 
                 if (!isCancelled()) {
+
                     // checking that it's a stable condition
                     int alarmCount = 0;
                     //theDataController.getInput();
                     int oldvalue = -1;
 
-                    while (true && !isCancelled()) {
+                    synchronized (firstPatient) {
+                        while (true && !isCancelled()) {
+                            //theDataController.getInput();
+                            //int heartRate = theDataController.getBPM(1);
+                            //Float Temp = theDataController.getTemp(1);
+                            //int heartRate = theDataController.patient1BPM;
+                            int heartRate = firstPatient.getBPM();
+                            Float Temp = firstPatient.getTemp();
+                            //Float Temp = theDataController.patient1Temp;
 
-                        //int heartRate = theDataController.getBPM(1);
-                        //Float Temp = theDataController.getTemp(1);
-                        int heartRate = firstPatient.getBPM();
-                        Float Temp = firstPatient.getTemp();
+                            if (oldvalue == -1) {
+                                oldvalue = heartRate;
+                            }
+                            // getting data from usb
 
-                        if (oldvalue == -1) {
-                            oldvalue = heartRate;
-                        }
-                        // getting data from usb
+                            patient1Temp.setText(String.valueOf(Temp));
+                            patient1bpm.setText(String.valueOf(heartRate));
+                            ecgDrawPanel1.move_1(heartRate / 4);
+                            if (heartRate != 0 && oldvalue != heartRate) {
+                                oldvalue = heartRate;
+                                if (heartRate < minimumHeartRate || heartRate > maximumHeartRate) {
+                                    if (alarmCount < 5) {
+                                        alarmCount++;
+                                    } else {
+                                        alarmCount = 0;
+                                        // if the alarm is not triggered, trigger it
+                                        if (!theAlarm.isTriggered(1)) {
+                                            theAlarm.trigger(1);
+                                            alarmIsReviewed = false;
 
-                        patient1Temp.setText(String.valueOf(Temp));
-                        patient1bpm.setText(String.valueOf(heartRate));
-                        ecgDrawPanel1.move_1(heartRate / 4);
-                        if (heartRate != 0 && oldvalue != heartRate) {
-                            oldvalue = heartRate;
-                            if (heartRate < minimumHeartRate || heartRate > maximumHeartRate) {
-                                if (alarmCount < 5) {
-                                    alarmCount++;
+                                            displayAlarmMessage(1);
+                                            while (!alarmIsReviewed) {
+                                                Thread.sleep(1000);
+                                            }
+
+                                            firstPatient.setLastAlarm(new Date());
+
+                                        }
+                                    }
                                 } else {
                                     alarmCount = 0;
-                                    // if the alarm is not triggered, trigger it
-                                    if (!theAlarm.isTriggered(1)) {
-                                        theAlarm.trigger(1);
-                                        alarmIsReviewed = false;
-
-                                        displayAlarmMessage(1);
-                                        while (!alarmIsReviewed) {
-                                            Thread.sleep(1000);
-                                        }
-
+                                    // if the alarm is triggered, shut it off
+                                    if (theAlarm.isTriggered(1)) {
+                                        theAlarm.stop(1);
                                     }
                                 }
-                            } else {
-                                alarmCount = 0;
-                                // if the alarm is triggered, shut it off
-                                if (theAlarm.isTriggered(1)) {
-                                    theAlarm.stop(1);
-                                }
                             }
-                        }
 
+                        }
                     }
                 }
                 return null;
@@ -702,52 +708,58 @@ public class HomePanel extends javax.swing.JPanel {
         worker2 = new SwingWorker() {
 
             @Override
-            protected Object doInBackground() throws Exception {
+            protected synchronized Object doInBackground() throws Exception {
                 if (!isCancelled()) {
                     int alarmCount = 0, oldvalue = -1;
-                    while (true && !isCancelled()) {
 
-                        // getting data from usb
-                        //int heartRate = theDataController.getBPM(2);
-                        //Float Temp = theDataController.getTemp(2);
-                        int heartRate = secondPatient.getBPM();
-                        Float Temp = secondPatient.getTemp();
+                    synchronized (secondPatient) {
 
-                        if (oldvalue == -1) {
-                            oldvalue = heartRate;
-                        }
+                        while (true && !isCancelled()) {
 
-                        patient2Temp.setText(String.valueOf(Temp));
-                        patient2bpm.setText(String.valueOf(heartRate));
-                        ecgDrawPanel2.move_1(heartRate / 4);
+                            // getting data from usb
+                            //int heartRate = theDataController.getBPM(2);
+                            //Float Temp = theDataController.getTemp(2);
+                            int heartRate = secondPatient.getBPM();
+                            Float Temp = secondPatient.getTemp();
+                            //int heartRate = theDataController.patient2BPM;
+                            //Float Temp = theDataController.patient2Temp;
 
-                        if (heartRate != 0 && heartRate != oldvalue) {
-                            oldvalue = heartRate;
+                            if (oldvalue == -1) {
+                                oldvalue = heartRate;
+                            }
 
-                            if (heartRate < minimumHeartRate || heartRate > maximumHeartRate) {
-                                if (alarmCount < 5) {
-                                    alarmCount++;
-                                } else {
-                                    alarmCount = 0;
-                                    // if the alarm is not triggered, trigger it
-                                    if (!theAlarm.isTriggered(2)) {
-                                        theAlarm.trigger(2);
-                                        alarmIsReviewed = false;
-                                        displayAlarmMessage(2);
-                                        while (!alarmIsReviewed) {
-                                            Thread.sleep(1000);
+                            patient2Temp.setText(String.valueOf(Temp));
+                            patient2bpm.setText(String.valueOf(heartRate));
+                            ecgDrawPanel2.move_1(heartRate / 4);
+
+                            if (heartRate != 0 && heartRate != oldvalue) {
+                                oldvalue = heartRate;
+
+                                if (heartRate < minimumHeartRate || heartRate > maximumHeartRate) {
+                                    if (alarmCount < 5) {
+                                        alarmCount++;
+                                    } else {
+                                        alarmCount = 0;
+                                        // if the alarm is not triggered, trigger it
+                                        if (!theAlarm.isTriggered(2)) {
+                                            theAlarm.trigger(2);
+                                            alarmIsReviewed = false;
+                                            displayAlarmMessage(2);
+                                            while (!alarmIsReviewed) {
+                                                Thread.sleep(1000);
+                                            }
                                         }
                                     }
-                                }
-                            } else {
-                                alarmCount = 0;
-                                // if the alarm is triggered, shut it off
-                                if (theAlarm.isTriggered(2)) {
-                                    theAlarm.stop(2);
+                                } else {
+                                    alarmCount = 0;
+                                    // if the alarm is triggered, shut it off
+                                    if (theAlarm.isTriggered(2)) {
+                                        theAlarm.stop(2);
+                                    }
                                 }
                             }
-                        }
 
+                        }
                     }
                 }
                 return null;
@@ -920,4 +932,8 @@ public class HomePanel extends javax.swing.JPanel {
         topFrame.deletePatient(id);
     }
 
+    public void setValues(int minBPM, int maxBPM) {
+        this.maximumHeartRate = minBPM;
+        this.minimumHeartRate = maxBPM;
+    }
 }
