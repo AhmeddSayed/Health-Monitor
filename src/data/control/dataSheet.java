@@ -312,7 +312,7 @@ public class dataSheet {
 
     }
 
-    private void saveToDisk() {
+    public void saveToDisk() {
         // saving to disk
         FileOutputStream fileOut;
         try {

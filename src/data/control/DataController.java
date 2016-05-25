@@ -55,26 +55,32 @@ public class DataController {
             //System.out.println(message);
 
             System.out.println("Message is: " + message);
+            if (!message.split(":")[2].isEmpty()) {
+                switch (message.split(":")[2]) {
+                    case "1":
+                        if (!message.split(":")[1].isEmpty() && !message.split(":")[0].isEmpty()) {
+                            this.patients.get(0).setBPM(Integer.valueOf(message.split(":")[1]));
+                            this.patients.get(0).setTemp(Float.valueOf(message.split(":")[0]));
+                            System.out.println(this.patients.get(0).getName() + " Temp: " + this.patients.get(0).getTemp() + "BPM: " + this.patients.get(0).getBPM());
+                            this.patient1BPM = Integer.valueOf(message.split(":")[1]);
+                            this.patient1Temp = Float.valueOf(message.split(":")[0]);
+                        }
+                        break;
+                    case "2":
+                    default:
 
-            switch (message.split(":")[2]) {
-                case "1":
-                    this.patients.get(0).setBPM(Integer.valueOf(message.split(":")[1]));
-                    this.patients.get(0).setTemp(Float.valueOf(message.split(":")[0]));
-                    System.out.println(this.patients.get(0).getName() + " Temp: " + this.patients.get(0).getTemp() + "BPM: " + this.patients.get(0).getBPM());
-                    this.patient1BPM = Integer.valueOf(message.split(":")[1]);
-                    this.patient1Temp = Float.valueOf(message.split(":")[0]);
-                    break;
-                case "2":
-                default:
+                        if (!message.split(":")[1].isEmpty() && !message.split(":")[0].isEmpty()) {
 
-                    this.patients.get(1).setBPM(Integer.valueOf(message.split(":")[1]));
-                    this.patients.get(1).setTemp(Float.valueOf(message.split(":")[0]));
-                    System.out.println(this.patients.get(1).getName() + " Temp: " + this.patients.get(1).getTemp() + "BPM: " + this.patients.get(1).getBPM());
+                            this.patients.get(1).setBPM(Integer.valueOf(message.split(":")[1]));
+                            this.patients.get(1).setTemp(Float.valueOf(message.split(":")[0]));
+                            System.out.println(this.patients.get(1).getName() + " Temp: " + this.patients.get(1).getTemp() + "BPM: " + this.patients.get(1).getBPM());
 
-                    this.patient2BPM = Integer.valueOf(message.split(":")[1]);
-                    this.patient2Temp = Float.valueOf(message.split(":")[0]);
-                    break;
+                            this.patient2BPM = Integer.valueOf(message.split(":")[1]);
+                            this.patient2Temp = Float.valueOf(message.split(":")[0]);
+                        }
 
+                        break;
+                }
             }
 
         }
