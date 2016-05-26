@@ -32,8 +32,8 @@ public class DataController {
         // initialize database, load all data in memory as Patients
         // initialize datainput from serial port
         // setup automated data refresh
-        //String message = input.read();
-        String message = generateMessage();
+        String message = input.read();
+        //String message = generateMessage();
 
         if (!message.equals("") && message != null && !message.isEmpty() && message.split(":").length >= 2) {
             //System.out.println(message);
@@ -135,7 +135,8 @@ public class DataController {
     String generateMessage() {
         Random r = new Random();
         int id = r.nextInt(2) + 1;
-        int BPM = r.nextInt(60) + 50;
+        //int BPM = r.nextInt(60) + 50;
+        int BPM = r.nextInt(40) + 100;
         Float temp = new Float(r.nextInt(300) + 3500) / 100;
 
         String theMessage = temp + ":" + BPM + ":" + id;

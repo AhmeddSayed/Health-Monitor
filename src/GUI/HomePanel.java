@@ -664,8 +664,41 @@ public class HomePanel extends javax.swing.JPanel {
                         patient2Temp.setText(String.valueOf(secondPatient.getTemp()));
                         patient2bpm.setText(String.valueOf(secondPatient.getBPM()));
 
-                        checkAlarm(firstPatient);
-                        checkAlarm(secondPatient);
+                        if (firstPatient.alarms(minimumHeartRate, maximumHeartRate)) {
+                            // if the alarm is not triggered, trigger it
+                            if (!theAlarm.isTriggered(1)) {
+                                theAlarm.trigger(1);
+                                alarmIsReviewed = false;
+
+                                displayAlarmMessage(1);
+                                while (!alarmIsReviewed) {
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException ex) {
+                                        Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                }
+
+                            }
+
+                        }
+                        if (secondPatient.alarms(minimumHeartRate, maximumHeartRate)) {
+                            // if the alarm is not triggered, trigger it
+                            if (!theAlarm.isTriggered(2)) {
+                                theAlarm.trigger(2);
+                                alarmIsReviewed = false;
+
+                                displayAlarmMessage(2);
+                                while (!alarmIsReviewed) {
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException ex) {
+                                        Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                }
+
+                            }
+                        }
 
                         Thread.sleep(500);
                     }
@@ -838,51 +871,4 @@ public class HomePanel extends javax.swing.JPanel {
         this.minimumHeartRate = maxBPM;
     }
 
-    private void checkAlarm(Patient patient1) {
-        /*        
-        // checking if patient 1 alarms
-        if (oldvalue == -1) {
-            oldvalue = heartRate;
-        }
-
-        // checking if patient 1 alarms
-        if (patient2Oldvalue == -1) {
-            patient2Oldvalue = heartRate;
-        }
-
-        if (heartRate != 0 && oldvalue != heartRate) {
-            oldvalue = heartRate;
-            if (heartRate < minimumHeartRate || heartRate > maximumHeartRate) {
-                if (alarmCount < 5) {
-                    alarmCount++;
-                } else {
-                    alarmCount = 0;
-                    // if the alarm is not triggered, trigger it
-                    if (!theAlarm.isTriggered(1)) {
-                        theAlarm.trigger(1);
-                        alarmIsReviewed = false;
-
-                        displayAlarmMessage(1);
-                        while (!alarmIsReviewed) {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-
-                        firstPatient.setLastAlarm(new Date());
-
-                    }
-                }
-            } else {
-                alarmCount = 0;
-                // if the alarm is triggered, shut it off
-                if (theAlarm.isTriggered(1)) {
-                    theAlarm.stop(1);
-                }
-            }
-        }
-         */
-    }
 }

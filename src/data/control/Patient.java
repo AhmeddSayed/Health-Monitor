@@ -5,8 +5,11 @@
  */
 package data.control;
 
+import GUI.HomePanel;
 import java.util.ArrayDeque;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -147,4 +150,26 @@ public class Patient {
         return this.heartRate;
     }
 
+    public boolean alarms(int minimumHeartRate, int maximumHeartRate) {
+        int alarmCount = 0;
+
+        for (Double x : this.heartRate) {
+            if (x < minimumHeartRate || x > maximumHeartRate) {
+                if (alarmCount < 3) {
+                    alarmCount++;
+                } else {
+                    break;
+                }
+
+            }
+        }
+
+        if (alarmCount >= 3) {
+            this.setLastAlarm(new Date());
+            return true;
+
+        } else {
+            return false;
+        }
+    }
 }
