@@ -13,6 +13,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /**
  *
@@ -46,29 +47,22 @@ public class ecgDrawPanel extends javax.swing.JPanel {
     public void move_1(int reading) {
         Point p1, p2;
 
-        try {
-            if (previousPoint == null) {
-                p1 = new Point(0, reading - 75);
-            } else {
-                p1 = previousPoint;
-            }
-            p2 = new Point(0, reading - 75);
-
-            //p2 = new Point(0, reading);
-            G.setColor(Color.black);
-            G.drawLine(5, getHeight() / 2, getWidth(), getHeight() / 2);
-            G.drawImage(I, 0, 0, getWidth() - point_s, getHeight(), point_s, 0, getWidth(), getHeight(), null);
-            clear(getWidth() - point_s, point_s);
-            G.setColor(Color.red);
-            G.drawLine(getWidth() - point_s - 1, p1.y + getHeight() / 2, getWidth() - 1, p2.y + getHeight() / 2);
-            previousPoint = p2;
-            repaint();
-            // allPoints.remove(0);
-            if (!Thread.interrupted()) {
-                Thread.sleep(500);
-            }
-        } catch (InterruptedException ex) {
+        if (previousPoint == null) {
+            p1 = new Point(0, reading - 75);
+        } else {
+            p1 = previousPoint;
         }
+        p2 = new Point(0, reading - 75);
+
+        //p2 = new Point(0, reading);
+        G.setColor(Color.black);
+        G.drawLine(5, getHeight() / 2, getWidth(), getHeight() / 2);
+        G.drawImage(I, 0, 0, getWidth() - point_s, getHeight(), point_s, 0, getWidth(), getHeight(), null);
+        clear(getWidth() - point_s, point_s);
+        G.setColor(Color.red);
+        G.drawLine(getWidth() - point_s - 1, p1.y + getHeight() / 2, getWidth() - 1, p2.y + getHeight() / 2);
+        previousPoint = p2;
+        repaint();
 
     }
 
@@ -96,6 +90,10 @@ public class ecgDrawPanel extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    public void plot(JLabel patient1) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

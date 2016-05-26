@@ -5,7 +5,9 @@
  */
 package data.control;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.SwingWorker;
 import port.input.DataInput;
 
@@ -18,52 +20,36 @@ public class DataController {
     volatile ArrayList<Patient> patients = new ArrayList();
     dataSheet dataSheet = new dataSheet();
     DataInput input = new DataInput();
-    SwingWorker updateInput;
     public volatile int patient1BPM = 0, patient2BPM = 0;
     public volatile Float patient1Temp = new Float(0), patient2Temp = new Float(0);
 
     public DataController() {
         loadPatients();
-
-        updateInput = new SwingWorker() {
-
-            @Override
-            protected Object doInBackground() throws Exception {
-                synchronized (patients) {
-                    while (true && !isCancelled()) {
-                        getInput();
-                    }
-                }
-                return null;
-            }
-        };
-        try {
-            updateInput.execute();
-
-        } catch (Exception e) {
-            System.err.println(e.toString());
-        }
     }
 
     public void getInput() {
+
         // initialize database, load all data in memory as Patients
         // initialize datainput from serial port
         // setup automated data refresh
         String message = input.read();
+        //String message = generateMessage();
 
         if (!message.equals("") && message != null && !message.isEmpty() && message.split(":").length >= 2) {
             //System.out.println(message);
 
-            System.out.println("Message is: " + message);
+            //System.out.println("Message is: " + message);
             if (!message.split(":")[2].isEmpty()) {
                 switch (message.split(":")[2]) {
                     case "1":
                         if (!message.split(":")[1].isEmpty() && !message.split(":")[0].isEmpty()) {
+
                             this.patients.get(0).setBPM(Integer.valueOf(message.split(":")[1]));
                             this.patients.get(0).setTemp(Float.valueOf(message.split(":")[0]));
-                            System.out.println(this.patients.get(0).getName() + " Temp: " + this.patients.get(0).getTemp() + "BPM: " + this.patients.get(0).getBPM());
-                            this.patient1BPM = Integer.valueOf(message.split(":")[1]);
-                            this.patient1Temp = Float.valueOf(message.split(":")[0]);
+                            System.out.println(this.patients.get(0).getName() + " Temp: " + this.patients.get(0).getTemp() + "  BPM: " + this.patients.get(0).getBPM());
+
+                            //this.patient1BPM = Integer.valueOf(message.split(":")[1]);
+                            //this.patient1Temp = Float.valueOf(message.split(":")[0]);
                         }
                         break;
                     case "2":
@@ -74,9 +60,8 @@ public class DataController {
                             this.patients.get(1).setBPM(Integer.valueOf(message.split(":")[1]));
                             this.patients.get(1).setTemp(Float.valueOf(message.split(":")[0]));
                             System.out.println(this.patients.get(1).getName() + " Temp: " + this.patients.get(1).getTemp() + "BPM: " + this.patients.get(1).getBPM());
-
-                            this.patient2BPM = Integer.valueOf(message.split(":")[1]);
-                            this.patient2Temp = Float.valueOf(message.split(":")[0]);
+                            //this.patient2BPM = Integer.valueOf(message.split(":")[1]);
+                            //this.patient2Temp = Float.valueOf(message.split(":")[0]);
                         }
 
                         break;
@@ -86,6 +71,20 @@ public class DataController {
         }
     }
 
+    public void updateInput() {
+        SwingWorker updateInput = new SwingWorker() {
+
+            @Override
+            protected Object doInBackground() throws Exception {
+                while (true && !isCancelled()) {
+                    getInput();
+                }
+                return null;
+            }
+        };
+
+        updateInput.execute();
+    }
 
     /*
      *  Function that loads the patients from database into memory
@@ -101,17 +100,17 @@ public class DataController {
     }
 
     public void addPatient(Patient newPatient) {
-        updateInput.cancel(true);
+        //updateInput.cancel(true);
         dataSheet.addPatient(newPatient);
-        updateInput.execute();
+        //updateInput.execute();
 
     }
 
     public void update(ArrayList<Patient> allPatients) {
-        updateInput.cancel(true);
+        //updateInput.cancel(true);
         this.patients = allPatients;
         dataSheet.update(patients);
-        updateInput.execute();
+        //updateInput.execute();
     }
 
     public int getBPM(int i) {
@@ -136,4 +135,13 @@ public class DataController {
         }
     }
 
+    String generateMessage() {
+        Random r = new Random();
+        int id = r.nextInt(2) + 1;
+        int BPM = r.nextInt(60) + 50;
+        Float temp = new Float(r.nextInt(300) + 3500) / 100;
+
+        String theMessage = temp + ":" + BPM + ":" + id;
+        return theMessage;
+    }
 }
