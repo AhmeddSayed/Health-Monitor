@@ -118,8 +118,13 @@ public class dataSheet {
 
             for (Iterator itr = newPatient.getBPMArray().iterator(); itr.hasNext();) {
                 cell = newRow.getCell(cellID);
+
+                if (cell == null) {
+                    cell = newRow.createCell(cellID);
+                }
                 cell.setCellValue((Double) itr.next());
                 cellID++;
+
             }
         }
 
@@ -129,6 +134,9 @@ public class dataSheet {
 
             for (Iterator itr = newPatient.getTempArray().iterator(); itr.hasNext();) {
                 cell = newRow.getCell(cellID);
+                if (cell == null) {
+                    cell = newRow.createCell(cellID);
+                }
                 cell.setCellValue((Double) itr.next());
                 cellID++;
             }

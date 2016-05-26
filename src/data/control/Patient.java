@@ -44,7 +44,7 @@ public class Patient {
 
     public void addHeartRate(double heartRate) {
         // pop first added
-        if (!this.heartRate.isEmpty()) {
+        if (!this.heartRate.isEmpty() && this.heartRate.size() == 5) {
             this.heartRate.remove();
         }
         this.heartRate.add(heartRate);
@@ -52,7 +52,7 @@ public class Patient {
 
     public void addTempreature(double tempreature) {
         // using the array list as a stack
-        if (!this.tempreature.isEmpty()) {
+        if (!this.tempreature.isEmpty() && this.tempreature.size() == 5) {
             this.tempreature.remove();
         }
         this.tempreature.add(tempreature);
@@ -103,12 +103,12 @@ public class Patient {
     public void setTemp(Float newTemp) {
 
         this.Temp = newTemp;
-        //this.addTempreature(new Double(newTemp));
+        this.addTempreature(new Double(newTemp));
     }
 
     public void setBPM(int newBPM) {
         this.BPM = newBPM;
-        //this.addHeartRate(new Double(newBPM));
+        this.addHeartRate(new Double(newBPM));
     }
 
     public Float getTemp() {

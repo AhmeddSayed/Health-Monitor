@@ -32,8 +32,8 @@ public class DataController {
         // initialize database, load all data in memory as Patients
         // initialize datainput from serial port
         // setup automated data refresh
-        String message = input.read();
-        //String message = generateMessage();
+        //String message = input.read();
+        String message = generateMessage();
 
         if (!message.equals("") && message != null && !message.isEmpty() && message.split(":").length >= 2) {
             //System.out.println(message);
@@ -48,8 +48,6 @@ public class DataController {
                             this.patients.get(0).setTemp(Float.valueOf(message.split(":")[0]));
                             System.out.println(this.patients.get(0).getName() + " Temp: " + this.patients.get(0).getTemp() + "  BPM: " + this.patients.get(0).getBPM());
 
-                            //this.patient1BPM = Integer.valueOf(message.split(":")[1]);
-                            //this.patient1Temp = Float.valueOf(message.split(":")[0]);
                         }
                         break;
                     case "2":
@@ -60,8 +58,7 @@ public class DataController {
                             this.patients.get(1).setBPM(Integer.valueOf(message.split(":")[1]));
                             this.patients.get(1).setTemp(Float.valueOf(message.split(":")[0]));
                             System.out.println(this.patients.get(1).getName() + " Temp: " + this.patients.get(1).getTemp() + "BPM: " + this.patients.get(1).getBPM());
-                            //this.patient2BPM = Integer.valueOf(message.split(":")[1]);
-                            //this.patient2Temp = Float.valueOf(message.split(":")[0]);
+
                         }
 
                         break;

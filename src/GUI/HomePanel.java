@@ -839,7 +839,7 @@ public class HomePanel extends javax.swing.JPanel {
     }
 
     private void checkAlarm(Patient patient1) {
-        /*
+        /*        
         // checking if patient 1 alarms
         if (oldvalue == -1) {
             oldvalue = heartRate;
