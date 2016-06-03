@@ -250,14 +250,14 @@ public class dataSheet {
                         case 4: // heart rate
                         case 5: // heart rate
                         case 6: // heart rate
-                            aPatient.addHeartRate(cell.getNumericCellValue());
+                            //aPatient.addHeartRate(cell.getNumericCellValue());
                             break;
                         case 7: // tempreature
                         case 8: // tempreature
                         case 9: // tempreature
                         case 10:// tempreature
                         case 11:// tempreature
-                            aPatient.addTempreature(cell.getNumericCellValue());
+                            //aPatient.addTempreature(cell.getNumericCellValue());
                             break;
                         case 12:
                             // blood_type

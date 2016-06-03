@@ -8,6 +8,8 @@ package data.control;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingWorker;
 import port.input.DataInput;
 
@@ -22,6 +24,7 @@ public class DataController {
     DataInput input = new DataInput();
     public volatile int patient1BPM = 0, patient2BPM = 0;
     public volatile Float patient1Temp = new Float(0), patient2Temp = new Float(0);
+    public SwingWorker updateInput;
 
     public DataController() {
         loadPatients();
@@ -32,8 +35,8 @@ public class DataController {
         // initialize database, load all data in memory as Patients
         // initialize datainput from serial port
         // setup automated data refresh
-        String message = input.read();
-        //String message = generateMessage();
+        //String message = input.read();
+        String message = generateMessage();
 
         if (!message.equals("") && message != null && !message.isEmpty() && message.split(":").length >= 2) {
             //System.out.println(message);
@@ -58,7 +61,6 @@ public class DataController {
                             this.patients.get(1).setBPM(Integer.valueOf(message.split(":")[1]));
                             this.patients.get(1).setTemp(Float.valueOf(message.split(":")[0]));
                             System.out.println(this.patients.get(1).getName() + " Temp: " + this.patients.get(1).getTemp() + "BPM: " + this.patients.get(1).getBPM());
-
                         }
 
                         break;
@@ -69,7 +71,7 @@ public class DataController {
     }
 
     public void updateInput() {
-        SwingWorker updateInput = new SwingWorker() {
+        updateInput = new SwingWorker() {
 
             @Override
             protected Object doInBackground() throws Exception {
@@ -97,46 +99,29 @@ public class DataController {
     }
 
     public void addPatient(Patient newPatient) {
-        //updateInput.cancel(true);
+        updateInput.cancel(true);
         dataSheet.addPatient(newPatient);
-        //updateInput.execute();
+        updateInput.execute();
 
     }
 
     public void update(ArrayList<Patient> allPatients) {
-        //updateInput.cancel(true);
+        updateInput.cancel(true);
         this.patients = allPatients;
         dataSheet.update(patients);
-        //updateInput.execute();
-    }
-
-    public int getBPM(int i) {
-        //this.getInput();
-        //return this.patients.get(i - 1).getBPM();
-
-        if (i == 1) {
-            return this.patient1BPM;
-        } else {
-            return this.patient2BPM;
-        }
-
-    }
-
-    public Float getTemp(int i) {
-        //this.getInput();
-        //return this.patients.get(i - 1).getTemp();
-        if (i == 1) {
-            return this.patient2Temp;
-        } else {
-            return this.patient2Temp;
-        }
+        updateInput.execute();
     }
 
     String generateMessage() {
+        /*try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
         Random r = new Random();
         int id = r.nextInt(2) + 1;
         //int BPM = r.nextInt(60) + 50;
-        int BPM = r.nextInt(40) + 100;
+        int BPM = r.nextInt(70) + 60;
         Float temp = new Float(r.nextInt(300) + 3500) / 100;
 
         String theMessage = temp + ":" + BPM + ":" + id;

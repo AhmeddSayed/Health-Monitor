@@ -27,6 +27,7 @@ public class Patient {
     volatile Float Temp = new Float(0);
     volatile int BPM = 0;
     String bloodType;
+    int alarmCounts = 0;
 
     public void setID(int id) {
         this.id = id;
@@ -150,26 +151,35 @@ public class Patient {
         return this.heartRate;
     }
 
-    public boolean alarms(int minimumHeartRate, int maximumHeartRate) {
-        int alarmCount = 0;
-
-        for (Double x : this.heartRate) {
-            if (x < minimumHeartRate || x > maximumHeartRate) {
-                if (alarmCount < 3) {
-                    alarmCount++;
-                } else {
-                    break;
-                }
-
-            }
-        }
-
-        if (alarmCount >= 3) {
+    public boolean shouldAlarm(int minimumHeartRate, int maximumHeartRate) {
+        alarms(minimumHeartRate, maximumHeartRate);
+        if (this.alarmCounts >= 10) {
+            this.alarmCounts = 0;
             this.setLastAlarm(new Date());
             return true;
-
         } else {
             return false;
         }
+    }
+
+    public void alarms(int minimumHeartRate, int maximumHeartRate) {
+        int BPMSum = 0;
+        int BPMAverage = 0;
+
+        if (this.heartRate.size() < 3) {
+            return;
+        }
+        for (Double x : this.heartRate) {
+            BPMSum += x.intValue();
+        }
+
+        BPMAverage = BPMSum / this.heartRate.size();
+
+        if (BPMAverage < minimumHeartRate || BPMAverage > maximumHeartRate) {
+            this.alarmCounts++;
+        } else {
+            this.alarmCounts--;
+        }
+
     }
 }

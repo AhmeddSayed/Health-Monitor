@@ -78,7 +78,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="ecgDrawPanel1" pref="279" max="32767" attributes="0"/>
+                  <Component id="ecgDrawPanel1" pref="270" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
@@ -110,7 +110,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
                   <Component id="jLabel7" min="-2" pref="53" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -126,7 +126,7 @@
                       <Component id="jLabel7" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="ecgDrawPanel1" min="-2" pref="92" max="-2" attributes="0"/>
+                  <Component id="ecgDrawPanel1" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="patient1Temp" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -169,7 +169,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="92" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -223,7 +223,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ecgDrawPanel2" pref="254" max="32767" attributes="0"/>
+                          <Component id="ecgDrawPanel2" pref="270" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -257,7 +257,7 @@
                               </Group>
                               <Component id="jLabel6" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="60" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="76" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -275,7 +275,7 @@
                       <Component id="jLabel6" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="ecgDrawPanel2" min="-2" pref="92" max="-2" attributes="0"/>
+                  <Component id="ecgDrawPanel2" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="patient2Temp" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -318,7 +318,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="92" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -409,7 +409,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="patient3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="ecgDrawPanel3" min="-2" pref="92" max="-2" attributes="0"/>
+                  <Component id="ecgDrawPanel3" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="patient1Temp1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -452,7 +452,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="92" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -510,7 +510,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ecgDrawPanel4" pref="255" max="32767" attributes="0"/>
+                          <Component id="ecgDrawPanel4" pref="270" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -544,7 +544,7 @@
                                   <Component id="patient1bpm3" min="-2" pref="51" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="52" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="67" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -557,7 +557,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="patient4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="ecgDrawPanel4" min="-2" pref="92" max="-2" attributes="0"/>
+                  <Component id="ecgDrawPanel4" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="patient2Temp1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -600,7 +600,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="92" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

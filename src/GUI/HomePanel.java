@@ -109,7 +109,7 @@ public class HomePanel extends javax.swing.JPanel {
         );
         ecgDrawPanel1Layout.setVerticalGroup(
             ecgDrawPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 92, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
         patient1Temp.setText("jTextField1");
@@ -163,7 +163,7 @@ public class HomePanel extends javax.swing.JPanel {
                                     .addComponent(jLabel1)
                                     .addGap(39, 39, 39)
                                     .addComponent(patient1Temp, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         monitor1Layout.setVerticalGroup(
@@ -175,7 +175,7 @@ public class HomePanel extends javax.swing.JPanel {
                         .addComponent(patient1))
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ecgDrawPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ecgDrawPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patient1Temp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,7 +204,7 @@ public class HomePanel extends javax.swing.JPanel {
         );
         ecgDrawPanel2Layout.setVerticalGroup(
             ecgDrawPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 92, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
         patient2Temp.setText("jTextField1");
@@ -237,7 +237,7 @@ public class HomePanel extends javax.swing.JPanel {
                 .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(monitor2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ecgDrawPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
+                        .addComponent(ecgDrawPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
                     .addGroup(monitor2Layout.createSequentialGroup()
                         .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -261,7 +261,7 @@ public class HomePanel extends javax.swing.JPanel {
                                                 .addGap(39, 39, 39)
                                                 .addComponent(patient2Temp, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 60, Short.MAX_VALUE)))
+                        .addGap(0, 76, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         monitor2Layout.setVerticalGroup(
@@ -273,7 +273,7 @@ public class HomePanel extends javax.swing.JPanel {
                         .addComponent(patient2))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ecgDrawPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ecgDrawPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patient2Temp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,7 +302,7 @@ public class HomePanel extends javax.swing.JPanel {
         );
         ecgDrawPanel3Layout.setVerticalGroup(
             ecgDrawPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 92, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
         patient1Temp1.setText("No Input");
@@ -364,7 +364,7 @@ public class HomePanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(monitor3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ecgDrawPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addComponent(ecgDrawPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                 .addContainerGap())
         );
         monitor3Layout.setVerticalGroup(
@@ -373,7 +373,7 @@ public class HomePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(patient3)
                 .addGap(28, 28, 28)
-                .addComponent(ecgDrawPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ecgDrawPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(monitor3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patient1Temp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -402,7 +402,7 @@ public class HomePanel extends javax.swing.JPanel {
         );
         ecgDrawPanel4Layout.setVerticalGroup(
             ecgDrawPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 92, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
         patient2Temp1.setText("No Input");
@@ -435,7 +435,7 @@ public class HomePanel extends javax.swing.JPanel {
                 .addGroup(monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(monitor4Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ecgDrawPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
+                        .addComponent(ecgDrawPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
                     .addGroup(monitor4Layout.createSequentialGroup()
                         .addGroup(monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -460,7 +460,7 @@ public class HomePanel extends javax.swing.JPanel {
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(patient1bpm3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 52, Short.MAX_VALUE)))
+                        .addGap(0, 67, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         monitor4Layout.setVerticalGroup(
@@ -469,7 +469,7 @@ public class HomePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(patient4)
                 .addGap(28, 28, 28)
-                .addComponent(ecgDrawPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ecgDrawPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(monitor4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patient2Temp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -647,10 +647,6 @@ public class HomePanel extends javax.swing.JPanel {
         this.firstPatient = theDataController.getPatients().get(0);
         this.secondPatient = theDataController.getPatients().get(1);
 
-        // calling the ecg to draw the charts
-        ecgDrawPanel1.plot(patient1);
-        ecgDrawPanel2.plot(patient2);
-
         worker = new SwingWorker() {
 
             @Override
@@ -664,7 +660,7 @@ public class HomePanel extends javax.swing.JPanel {
                         patient2Temp.setText(String.valueOf(secondPatient.getTemp()));
                         patient2bpm.setText(String.valueOf(secondPatient.getBPM()));
 
-                        if (firstPatient.alarms(minimumHeartRate, maximumHeartRate)) {
+                        if (firstPatient.shouldAlarm(minimumHeartRate, maximumHeartRate)) {
                             // if the alarm is not triggered, trigger it
                             if (!theAlarm.isTriggered(1)) {
                                 theAlarm.trigger(1);
@@ -682,7 +678,8 @@ public class HomePanel extends javax.swing.JPanel {
                             }
 
                         }
-                        if (secondPatient.alarms(minimumHeartRate, maximumHeartRate)) {
+
+                        if (secondPatient.shouldAlarm(minimumHeartRate, maximumHeartRate)) {
                             // if the alarm is not triggered, trigger it
                             if (!theAlarm.isTriggered(2)) {
                                 theAlarm.trigger(2);

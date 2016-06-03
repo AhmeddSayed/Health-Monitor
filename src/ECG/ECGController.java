@@ -29,12 +29,13 @@ public class ECGController extends Thread {
     public void run() {
 
         while (!isCancelled) {
-            panel1.move_1(110 * patient1.getBPM()/283 );
-            panel2.move_1(110* patient2.getBPM()/283);
+            panel1.draw(patient1.getBPM());
+            panel2.draw(patient2.getBPM());
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(ECGController.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(ECGController.class.getName()).log(Level.SEVERE, null, ex);
+                //Thread.yield();
             }
         }
 
