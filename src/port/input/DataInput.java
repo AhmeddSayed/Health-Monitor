@@ -57,8 +57,6 @@ public class DataInput {
 
                     messageIndex++;
 
-                    //System.out.print((char) in.read());
-                    //theMessage.concat(String.valueOf((char) in.read))
                 } else {
                     messageIndex = 0;
                     break;

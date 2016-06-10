@@ -62,7 +62,7 @@ public class ecgDrawPanel extends javax.swing.JPanel {
         if (reading == 0) {
             p2 = new Point(0, getHeight() / 2);
         } else {
-            p2 = new Point(0, (getHeight()/2 - reading/2));
+            p2 = new Point(0, (getHeight() / 2 - reading / 2));
         }
 
         //p2 = new Point(0, (reading * 90) / 238);
@@ -75,6 +75,7 @@ public class ecgDrawPanel extends javax.swing.JPanel {
 
     }
 
+    @Override
     public void paint(Graphics g) {
         g.drawImage(I, 0, 0, null);
     }

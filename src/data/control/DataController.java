@@ -35,8 +35,8 @@ public class DataController {
         // initialize database, load all data in memory as Patients
         // initialize datainput from serial port
         // setup automated data refresh
-        //String message = input.read();
-        String message = generateMessage();
+        String message = input.read();
+        //String message = generateMessage();
 
         if (!message.equals("") && message != null && !message.isEmpty() && message.split(":").length >= 2) {
             //System.out.println(message);

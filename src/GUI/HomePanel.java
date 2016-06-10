@@ -109,7 +109,7 @@ public class HomePanel extends javax.swing.JPanel {
         );
         ecgDrawPanel1Layout.setVerticalGroup(
             ecgDrawPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 150, Short.MAX_VALUE)
         );
 
         patient1Temp.setText("jTextField1");
@@ -139,44 +139,46 @@ public class HomePanel extends javax.swing.JPanel {
         monitor1Layout.setHorizontalGroup(
             monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(monitor1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ecgDrawPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(monitor1Layout.createSequentialGroup()
-                .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(monitor1Layout.createSequentialGroup()
+                        .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(monitor1Layout.createSequentialGroup()
+                                .addGap(99, 99, 99)
+                                .addComponent(patient1))
+                            .addGroup(monitor1Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(monitor1Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(patient1bpm, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(monitor1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(39, 39, 39)
+                                        .addComponent(patient1Temp, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 76, Short.MAX_VALUE))
+                    .addGroup(monitor1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ecgDrawPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, monitor1Layout.createSequentialGroup()
                         .addComponent(editPatient1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deletePatient1))
-                    .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(monitor1Layout.createSequentialGroup()
-                            .addGap(99, 99, 99)
-                            .addComponent(patient1))
-                        .addGroup(monitor1Layout.createSequentialGroup()
-                            .addGap(33, 33, 33)
-                            .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(monitor1Layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(patient1bpm, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(monitor1Layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(39, 39, 39)
-                                    .addComponent(patient1Temp, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(deletePatient1)
+                        .addGap(70, 70, 70)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         monitor1Layout.setVerticalGroup(
             monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(monitor1Layout.createSequentialGroup()
                 .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(monitor1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(patient1))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ecgDrawPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(patient1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ecgDrawPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(monitor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patient1Temp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -200,11 +202,11 @@ public class HomePanel extends javax.swing.JPanel {
         ecgDrawPanel2.setLayout(ecgDrawPanel2Layout);
         ecgDrawPanel2Layout.setHorizontalGroup(
             ecgDrawPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 270, Short.MAX_VALUE)
         );
         ecgDrawPanel2Layout.setVerticalGroup(
             ecgDrawPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 150, Short.MAX_VALUE)
         );
 
         patient2Temp.setText("jTextField1");
@@ -234,47 +236,48 @@ public class HomePanel extends javax.swing.JPanel {
         monitor2Layout.setHorizontalGroup(
             monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(monitor2Layout.createSequentialGroup()
-                .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(monitor2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ecgDrawPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
-                    .addGroup(monitor2Layout.createSequentialGroup()
-                        .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(monitor2Layout.createSequentialGroup()
-                                    .addComponent(editPatient2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(deletePatient2))
+                .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, monitor2Layout.createSequentialGroup()
+                        .addContainerGap(276, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, monitor2Layout.createSequentialGroup()
+                        .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, monitor2Layout.createSequentialGroup()
+                                .addGap(99, 99, 99)
+                                .addComponent(patient2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, monitor2Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
                                 .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ecgDrawPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(monitor2Layout.createSequentialGroup()
-                                        .addGap(99, 99, 99)
-                                        .addComponent(patient2))
-                                    .addGroup(monitor2Layout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
-                                        .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(monitor2Layout.createSequentialGroup()
-                                                .addComponent(jLabel9)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(patient2bpm, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(monitor2Layout.createSequentialGroup()
+                                        .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(editPatient2)
+                                            .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel2)
+                                                .addComponent(jLabel9)))
+                                        .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(monitor2Layout.createSequentialGroup()
                                                 .addGap(39, 39, 39)
-                                                .addComponent(patient2Temp, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 76, Short.MAX_VALUE)))
+                                                .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(patient2bpm, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(patient2Temp, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(monitor2Layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(deletePatient2)))))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         monitor2Layout.setVerticalGroup(
             monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(monitor2Layout.createSequentialGroup()
                 .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(monitor2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(patient2))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ecgDrawPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(patient2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ecgDrawPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(monitor2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patient2Temp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -531,17 +534,6 @@ public class HomePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void deletePatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatient1ActionPerformed
-        confirmDelete(1);
-
-    }//GEN-LAST:event_deletePatient1ActionPerformed
-
-    private void editPatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatient1ActionPerformed
-        // TODO add your handling code here:
-        mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
-        topFrame.editPatient(1);
-    }//GEN-LAST:event_editPatient1ActionPerformed
-
     private void editPatient2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatient2ActionPerformed
         // TODO add your handling code here:
         mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
@@ -579,6 +571,16 @@ public class HomePanel extends javax.swing.JPanel {
     private void patient1bpm2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patient1bpm2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_patient1bpm2ActionPerformed
+
+    private void deletePatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatient1ActionPerformed
+        confirmDelete(1);
+    }//GEN-LAST:event_deletePatient1ActionPerformed
+
+    private void editPatient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatient1ActionPerformed
+        // TODO add your handling code here:
+        mainFrame topFrame = (mainFrame) SwingUtilities.getWindowAncestor(this);
+        topFrame.editPatient(1);
+    }//GEN-LAST:event_editPatient1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
